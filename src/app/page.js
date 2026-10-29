@@ -1,3 +1,5 @@
+"use client";
+
 export const metadata = {
   title: "Portofolio — Muhamad Rafi Ramadhan",
   description: "Web & Mobile Developer Portfolio - Muhamad Rafi Ramadhan, Mahasiswa S1 Sistem Informasi.",
@@ -18,7 +20,6 @@ export const metadata = {
   },
 };
 
-"use client";
 
 import { useState, useEffect } from "react";
 
