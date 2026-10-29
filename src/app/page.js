@@ -1,3 +1,15 @@
+export const metadata = {
+  title: "Muhamad Rafi Ramadhan – Web & Mobile Developer",
+  description: "Portofolio Muhamad Rafi Ramadhan - Mahasiswa S1 Sistem Informasi & Web Developer yang berfokus pada aplikasi fungsional.",
+  openGraph: {
+    title: "Muhamad Rafi Ramadhan – Web & Mobile Developer",
+    description: "Portofolio Muhamad Rafi Ramadhan - Mahasiswa S1 Sistem Informasi & Web Developer.",
+    url: "https://rafispace.vercel.app",
+    siteName: "Portofolio Rafi",
+    type: "website",
+  },
+};
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -48,6 +60,7 @@ export default function Home() {
   const myEmail = "rafi25ramadhan@gmail.com";
   const myLinkedin = "https://www.linkedin.com/in/muhamad-rafi-ramadhan-955ba82ab";
   const myGithub = "https://github.com/raraanyway";
+  const myPortfolioUrl = "https://rafispace.vercel.app";
 
   // Kategori Filter Toolkit
   const categories = [
@@ -598,7 +611,6 @@ export default function Home() {
             <span>💬</span>
             <span>Chat WhatsApp</span>
           </a>
-
           <button
             onClick={handleCopyEmail}
             className="flex items-center gap-2.5 px-4 py-2.5 bg-[#12141D] border border-white/15 rounded-xl shadow-xl text-xs font-bold text-white hover:border-[#E84A27] hover:text-[#E84A27] hover:scale-105 active:scale-95 transition-all cursor-pointer"
@@ -692,7 +704,20 @@ export default function Home() {
                   pengguna yang intuitif end-to-end.
                 </p>
 
-                <div className="mt-8 flex flex-wrap items-center gap-3.5">
+                {/* Hyperlink Live Portfolio yang diminta */}
+                <div className="mt-5 mb-2">
+                  <span className="text-xs text-neutral-400 block mb-1">Live Portfolio Website:</span>
+                  <a 
+                    href={myPortfolioUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 hover:underline font-mono font-medium text-sm"
+                  >
+                    rafispace.vercel.app
+                  </a>
+                </div>
+
+                <div className="mt-6 flex flex-wrap items-center gap-3.5">
                   <a
                     href="#projects"
                     className="px-6 py-3 rounded-xl bg-[#E84A27] text-white text-xs font-mono font-bold uppercase tracking-widest hover:bg-[#ff5a36] hover:shadow-[0_0_25px_rgba(232,74,39,0.55)] hover:-translate-y-0.5 transition-all"
@@ -701,7 +726,7 @@ export default function Home() {
                   </a>
                   <a
                     href="/cv.pdf"
-                    download
+                    download="CV_Muhamad_Rafi_Ramadhan.pdf"
                     className="px-6 py-3 rounded-xl bg-[#161926] text-neutral-200 border border-white/15 text-xs font-mono font-bold uppercase tracking-widest hover:bg-[#E84A27]/15 hover:border-[#E84A27] transition-all"
                   >
                     📄 Download CV
