@@ -349,7 +349,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#07080C] text-[#F4F2ED] selection:bg-[#E84A27] selection:text-white relative overflow-x-hidden font-sans">
       
-      {/* ================= ANIMASI 3 ROBOT BERJALAN & NEON DI BACKGROUND ================= */}
+      {/* ================= ANIMASI ROBOT WALKER & EFEK BINTANG NEON DI BACKGROUND ================= */}
       <style>{`
         @keyframes walkRobot1 {
           0% { transform: translateX(-180px) translateY(0px) scale(0.7); opacity: 0.15; }
@@ -389,6 +389,13 @@ export default function Home() {
           pointer-events: none;
           animation: walkRobot3 36s linear infinite;
         }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.2; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 6px rgba(232, 74, 39, 0.8)); }
+        }
+        .star-neon-1 { animation: twinkle 3s ease-in-out infinite; }
+        .star-neon-2 { animation: twinkle 4.5s ease-in-out infinite 1.5s; }
+        .star-neon-3 { animation: twinkle 2.5s ease-in-out infinite 0.7s; }
         @keyframes scanline {
           0% { transform: translateY(-100%); opacity: 0; }
           40% { opacity: 0.6; }
@@ -415,26 +422,12 @@ export default function Home() {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
         }
-        .animate-scanline {
-          animation: scanline 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-        .animate-orbit-cw {
-          animation: orbit-cw 24s linear infinite;
-        }
-        .animate-orbit-ccw {
-          animation: orbit-ccw 18s linear infinite;
-        }
-        .animate-pulse-border {
-          animation: pulse-border 3.5s ease-in-out infinite;
-        }
-        .animate-float-slow {
-          animation: float-slow 5s ease-in-out infinite;
-        }
-        .animate-marquee-hud {
-          display: flex;
-          width: 200%;
-          animation: marquee-hud 30s linear infinite;
-        }
+        .animate-scanline { animation: scanline 5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .animate-orbit-cw { animation: orbit-cw 24s linear infinite; }
+        .animate-orbit-ccw { animation: orbit-ccw 18s linear infinite; }
+        .animate-pulse-border { animation: pulse-border 3.5s ease-in-out infinite; }
+        .animate-float-slow { animation: float-slow 5s ease-in-out infinite; }
+        .animate-marquee-hud { display: flex; width: 200%; animation: marquee-hud 30s linear infinite; }
         .tech-grid-bg {
           background-size: 48px 48px;
           background-image: 
@@ -475,6 +468,18 @@ export default function Home() {
           <path d="M35 52L20 62M65 52L80 62" stroke="#A855F7" strokeWidth="3" strokeLinecap="round"/>
           <path d="M42 90L40 125M58 90L60 125" stroke="#151824" strokeWidth="4" strokeLinecap="round"/>
         </svg>
+      </div>
+
+      {/* ================= EFEK GALAKSI & BINTANG NEON DI BACKGROUND ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-10 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-pink-600/10 via-purple-600/10 to-transparent blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/3 right-10 w-[450px] h-[450px] rounded-full bg-gradient-to-l from-orange-600/10 via-red-600/10 to-transparent blur-[150px] pointer-events-none" />
+        <div className="absolute top-20 left-[15%] w-2 h-2 rounded-full bg-[#E84A27] star-neon-1" />
+        <div className="absolute top-40 right-[25%] w-1.5 h-1.5 rounded-full bg-pink-500 star-neon-2" />
+        <div className="absolute top-1/3 left-[35%] w-2 h-2 rounded-full bg-purple-400 star-neon-3" />
+        <div className="absolute top-[60%] right-[15%] w-1.5 h-1.5 rounded-full bg-[#E84A27] star-neon-1" />
+        <div className="absolute bottom-24 left-[20%] w-2 h-2 rounded-full bg-pink-400 star-neon-2" />
+        <div className="absolute top-[25%] right-[10%] w-2 h-2 rounded-full bg-amber-300 star-neon-3" />
       </div>
 
       {/* ================= DYNAMIC INTERACTIVE MOUSE GLOW & TECH GRID ================= */}
@@ -673,7 +678,7 @@ export default function Home() {
                   </h1>
                 </div>
 
-                {/* Bio Diperbarui: Fokus ke Skill, Tanpa "Jakarta Selatan" di Paragraf, dan Rata Kiri-Kanan (Justify) */}
+                {/* Bio Diperbarui: Fokus ke Skill, Tanpa "Jakarta Selatan", dan Rata Kiri-Kanan (Justify) */}
                 <p className="mt-6 text-neutral-300 text-sm sm:text-base leading-relaxed text-justify max-w-lg font-normal">
                   Mahasiswa aktif S1 Sistem Informasi yang berfokus mengembangkan aplikasi web dan mobile modern, merancang arsitektur database yang solid, serta membangun antarmuka pengguna yang intuitif end-to-end.
                 </p>

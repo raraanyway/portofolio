@@ -71,3 +71,19 @@
   pointer-events: none;
   animation: walkRobot3 36s linear infinite;
 }
+
+/* ================= EFEK BINTANG NEON BERKELAP-KELIP ================= */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 6px rgba(232, 74, 39, 0.8)); }
+}
+
+.star-neon-1 {
+  animation: twinkle 3s ease-in-out infinite;
+}
+.star-neon-2 {
+  animation: twinkle 4.5s ease-in-out infinite 1.5s;
+}
+.star-neon-3 {
+  animation: twinkle 2.5s ease-in-out infinite 0.7s;
+}
