@@ -26,3 +26,48 @@
 .animate-fadeIn {
   animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* ================= ANIMASI ROBOT WALKER DI BACKGROUND ================= */
+@keyframes walkRobot1 {
+  0% { transform: translateX(-180px) translateY(0px) scale(0.7); opacity: 0.15; }
+  25% { transform: translateX(25vw) translateY(-8px) scale(0.7); }
+  50% { transform: translateX(50vw) translateY(0px) scale(0.7); opacity: 0.35; }
+  75% { transform: translateX(75vw) translateY(-8px) scale(0.7); }
+  100% { transform: translateX(110vw) translateY(0px) scale(0.7); opacity: 0.15; }
+}
+
+@keyframes walkRobot2 {
+  0% { transform: translateX(110vw) translateY(0px) scale(0.55) scaleX(-1); opacity: 0.1; }
+  50% { transform: translateX(40vw) translateY(-6px) scale(0.55) scaleX(-1); opacity: 0.3; }
+  100% { transform: translateX(-180px) translateY(0px) scale(0.55) scaleX(-1); opacity: 0.1; }
+}
+
+@keyframes walkRobot3 {
+  0% { transform: translateX(-200px) translateY(0px) scale(0.65); opacity: 0.12; }
+  50% { transform: translateX(60vw) translateY(-10px) scale(0.65); opacity: 0.28; }
+  100% { transform: translateX(110vw) translateY(0px) scale(0.65); opacity: 0.12; }
+}
+
+.robot-walker-1 {
+  position: fixed;
+  bottom: 12%;
+  z-index: 1;
+  pointer-events: none;
+  animation: walkRobot1 32s linear infinite;
+}
+
+.robot-walker-2 {
+  position: fixed;
+  bottom: 38%;
+  z-index: 1;
+  pointer-events: none;
+  animation: walkRobot2 40s linear infinite;
+}
+
+.robot-walker-3 {
+  position: fixed;
+  bottom: 65%;
+  z-index: 1;
+  pointer-events: none;
+  animation: walkRobot3 36s linear infinite;
+}

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 // Ini Metadata yang benar (gabungan judul dan paksaan logo)
 export const metadata = {
   title: "Portofolio — Muhamad Rafi Ramadhan",
-  description: "Mahasiswa S1 Sistem Informasi & Web Developer.",
+  description: "Mahasiswa S1 Sistem Informasi.",
   icons: {
     icon: '/logo.png', // Pastikan gambar logo.png sudah ada di folder public
   },

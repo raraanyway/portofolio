@@ -47,7 +47,6 @@ export default function Home() {
   const myEmail = "rafi25ramadhan@gmail.com";
   const myLinkedin = "https://www.linkedin.com/in/muhamad-rafi-ramadhan-955ba82ab";
   const myGithub = "https://github.com/raraanyway";
-  const myPortfolioUrl = "https://rafispace.vercel.app";
 
   // Kategori Filter Toolkit
   const categories = [
@@ -349,7 +348,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#07080C] text-[#F4F2ED] selection:bg-[#E84A27] selection:text-white relative overflow-x-hidden font-sans">
-      {/* ================= ANIMASI 3 ROBOT BERJALAN DI BACKGROUND ================= */}
+      
+      {/* ================= ANIMASI 3 ROBOT BERJALAN & NEON DI BACKGROUND ================= */}
       <style>{`
         @keyframes walkRobot1 {
           0% { transform: translateX(-180px) translateY(0px) scale(0.7); opacity: 0.15; }
@@ -673,36 +673,10 @@ export default function Home() {
                   </h1>
                 </div>
 
-                <p className="mt-6 text-neutral-300 text-sm sm:text-base leading-relaxed max-w-lg font-normal">
-                  Seorang{" "}
-                  <strong className="text-[#E84A27] font-bold">
-                    Web &amp; Mobile Developer
-                  </strong>{" "}
-                  serta mahasiswa aktif{" "}
-                  <strong className="text-white font-bold">
-                    S1 Sistem Informasi
-                  </strong>{" "}
-                  di{" "}
-                  <strong className="text-white font-bold">
-                    Jakarta Selatan
-                  </strong>{" "}
-                  yang berfokus membangun aplikasi modern yang terukur,
-                  berarsitektur database solid, dan memiliki pengalaman
-                  pengguna yang intuitif end-to-end.
+                {/* Bio Diperbarui: Fokus ke Skill, Tanpa "Jakarta Selatan" di Paragraf, dan Rata Kiri-Kanan (Justify) */}
+                <p className="mt-6 text-neutral-300 text-sm sm:text-base leading-relaxed text-justify max-w-lg font-normal">
+                  Mahasiswa aktif S1 Sistem Informasi yang berfokus mengembangkan aplikasi web dan mobile modern, merancang arsitektur database yang solid, serta membangun antarmuka pengguna yang intuitif end-to-end.
                 </p>
-
-                {/* Hyperlink Live Portfolio */}
-                <div className="mt-5 mb-2">
-                  <span className="text-xs text-neutral-400 block mb-1">Live Portfolio Website:</span>
-                  <a 
-                    href={myPortfolioUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 hover:underline font-mono font-medium text-sm"
-                  >
-                    rafispace.vercel.app
-                  </a>
-                </div>
 
                 <div className="mt-6 flex flex-wrap items-center gap-3.5">
                   <a
