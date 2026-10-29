@@ -1,10 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const size = {
-  width: 32,
-  height: 32,
-}
-
+export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
 export default function Icon() {
@@ -12,7 +8,7 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 18,
+          fontSize: 20,
           background: '#E84A27',
           width: '100%',
           height: '100%',
@@ -20,17 +16,14 @@ export default function Icon() {
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          borderRadius: '6px', // Lengkungan pinggir yang pas untuk ukuran kecil
+          borderRadius: '6px',
           fontWeight: 900,
-          fontFamily: 'system-ui, sans-serif',
-          letterSpacing: '-1px', // Merapatkan jarak antar huruf RR
+          fontFamily: 'sans-serif',
         }}
       >
         RR
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   )
 }
