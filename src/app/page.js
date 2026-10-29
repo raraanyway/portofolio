@@ -1,11 +1,19 @@
 export const metadata = {
-  title: "Muhamad Rafi Ramadhan – Web & Mobile Developer",
-  description: "Portofolio Muhamad Rafi Ramadhan - Mahasiswa S1 Sistem Informasi & Web Developer yang berfokus pada aplikasi fungsional.",
+  title: "Portofolio — Muhamad Rafi Ramadhan",
+  description: "Web & Mobile Developer Portfolio - Muhamad Rafi Ramadhan, Mahasiswa S1 Sistem Informasi.",
   openGraph: {
-    title: "Muhamad Rafi Ramadhan – Web & Mobile Developer",
-    description: "Portofolio Muhamad Rafi Ramadhan - Mahasiswa S1 Sistem Informasi & Web Developer.",
+    title: "Portofolio — Muhamad Rafi Ramadhan",
+    description: "Jelajahi karya, proyek sistem, dan keahlian rekayasa perangkat lunak saya di sini.",
     url: "https://rafispace.vercel.app",
-    siteName: "Portofolio Rafi",
+    siteName: "Portofolio",
+    images: [
+      {
+        url: "https://rafispace.vercel.app/og-image.jpg", // Pastikan file og-image.jpg ada di folder public
+        width: 1200,
+        height: 630,
+        alt: "Portofolio Muhamad Rafi Ramadhan",
+      },
+    ],
     type: "website",
   },
 };
@@ -704,7 +712,7 @@ export default function Home() {
                   pengguna yang intuitif end-to-end.
                 </p>
 
-                {/* Hyperlink Live Portfolio yang diminta */}
+                {/* Hyperlink Live Portfolio */}
                 <div className="mt-5 mb-2">
                   <span className="text-xs text-neutral-400 block mb-1">Live Portfolio Website:</span>
                   <a 
