@@ -7,19 +7,16 @@ export default function Home() {
   const [quickActionOpen, setQuickActionOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 600, y: 350 });
-  const [sysTime, setSysTime] = useState("20:00:00 WIB");
+  const [sysTime, setSysTime] = useState("21:00:00 WIB");
 
-  // State untuk Robot Android Interaktif (robot1)
-  const [robotMode, setRobotMode] = useState("ANALYZING_SYSTEM");
-  const [robotSpeech, setRobotSpeech] = useState(
-    "ANDROID_UNIT // 09: Menginisialisasi antarmuka portofolio Muhamad Rafi Ramadhan. Klik gambar robot untuk mengganti mode operasi."
-  );
+  // State untuk Mode Background Cyberpunk Interaktif
+  const [cyberOverdrive, setCyberOverdrive] = useState(false);
 
   // State untuk Interactive CLI Terminal Modal
   const [cliOpen, setCliOpen] = useState(false);
   const [cliInput, setCliInput] = useState("");
   const [cliHistory, setCliHistory] = useState([
-    { type: "system", text: "MRR CYBER-OS v4.2 — Neural Developer Terminal" },
+    { type: "system", text: "MRR CYBER-OS v4.5 — Neural Developer Terminal" },
     { type: "system", text: "Ketik 'help' untuk melihat daftar perintah sistem." }
   ]);
 
@@ -44,45 +41,15 @@ export default function Home() {
     };
   }, []);
 
-  // Kalkulasi Parallax Interaktif Mengikuti Kursor Mouse
+  // Kalkulasi Parallax Background Mengikuti Kursor Mouse
   const moveX =
     typeof window !== "undefined"
-      ? ((mousePos.x - window.innerWidth / 2) / window.innerWidth) * 18
+      ? ((mousePos.x - window.innerWidth / 2) / window.innerWidth) * 35
       : 0;
   const moveY =
     typeof window !== "undefined"
-      ? ((mousePos.y - window.innerHeight / 2) / window.innerHeight) * 14
+      ? ((mousePos.y - window.innerHeight / 2) / window.innerHeight) * 25
       : 0;
-
-  // Fungsi Saat Gambar Robot 1 Diklik (Interaktif)
-  const handleRobotInteract = () => {
-    const modes = [
-      {
-        mode: "COMBAT_RED_OVERDRIVE",
-        speech:
-          "OVERDRIVE AKTIF // Menampilkan rekam jejak Full-Stack Web, Mobile UX, dan arsitektur Relational Database."
-      },
-      {
-        mode: "NEURAL_SCAN_COMPLETE",
-        speech:
-          "SCAN SELESAI // 11 Keahlian utama terverifikasi: Next.js, React, Laravel, Node.js, MySQL, dan REST API."
-      },
-      {
-        mode: "READY_FOR_HIRE",
-        speech:
-          "STATUS: ONLINE // Muhamad Rafi Ramadhan siap berkolaborasi untuk proyek Web & Mobile di Jakarta Selatan."
-      },
-      {
-        mode: "ANALYZING_SYSTEM",
-        speech:
-          "ANDROID_UNIT // 09: Memantau telemetri sistem dan repositori GitHub secara real-time."
-      }
-    ];
-    const currentIndex = modes.findIndex((m) => m.mode === robotMode);
-    const next = modes[(currentIndex + 1) % modes.length];
-    setRobotMode(next.mode);
-    setRobotSpeech(next.speech);
-  };
 
   // ================= DATA PRIBADI =================
   const whatsappNumber = "6282246971567";
@@ -330,7 +297,7 @@ export default function Home() {
     if (cmd === "help") {
       newHistory.push({
         type: "output",
-        text: "Perintah tersedia: about | skills | projects | robot | location | whatsapp | contact | clear"
+        text: "Perintah tersedia: about | skills | projects | overdrive | location | whatsapp | contact | clear"
       });
     } else if (cmd === "about") {
       newHistory.push({
@@ -347,11 +314,11 @@ export default function Home() {
         type: "output",
         text: "1. R&F Express Laundry OS | 2. UniTrade Mobile E-Commerce App"
       });
-    } else if (cmd === "robot") {
-      handleRobotInteract();
+    } else if (cmd === "overdrive" || cmd === "robot") {
+      setCyberOverdrive(!cyberOverdrive);
       newHistory.push({
         type: "output",
-        text: "Mengubah status Android Cybernetic (robot1) di Hero Section..."
+        text: `Cyberpunk Background Overdrive: ${!cyberOverdrive ? "AKTIF (HIGH GLOW)" : "NORMAL"}`
       });
     } else if (cmd === "location") {
       newHistory.push({
@@ -388,48 +355,80 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#06030C] text-[#F5F0FF] selection:bg-[#EC4899] selection:text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#05020A] text-[#F5F0FF] selection:bg-[#EC4899] selection:text-white relative overflow-x-hidden">
       
-      {/* ================= 3 ROBOT CYBERPUNK DI BACKGROUND ================= */}
-      <div className="robot-walker-1">
-        <svg className="w-24 h-32 sm:w-32 sm:h-44 drop-shadow-[0_0_20px_rgba(236,72,153,0.75)]" viewBox="0 0 100 140" fill="none">
-          <circle cx="50" cy="25" r="18" fill="#130924" stroke="#EC4899" strokeWidth="3"/>
-          <path d="M40 22C45 20 55 20 60 22" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round"/>
-          <circle cx="43" cy="24" r="2.5" fill="#EF4444"/>
-          <circle cx="57" cy="24" r="2.5" fill="#EF4444"/>
-          <rect x="30" y="45" width="40" height="50" rx="8" fill="#0D061A" stroke="#A855F7" strokeWidth="2.5"/>
-          <circle cx="50" cy="65" r="8" fill="#EC4899" fillOpacity="0.5"/>
-          <path d="M30 55L15 75M70 55L85 75" stroke="#A855F7" strokeWidth="4" strokeLinecap="round"/>
-          <path d="M40 95L35 130M60 95L65 130" stroke="#EC4899" strokeWidth="5" strokeLinecap="round"/>
-        </svg>
-      </div>
-
-      <div className="robot-walker-2">
-        <svg className="w-20 h-28 sm:w-28 sm:h-36 drop-shadow-[0_0_20px_rgba(168,85,247,0.75)]" viewBox="0 0 100 140" fill="none">
-          <ellipse cx="50" cy="25" rx="15" ry="12" fill="#130924" stroke="#A855F7" strokeWidth="3"/>
-          <rect x="38" y="22" width="24" height="6" rx="3" fill="#EF4444"/>
-          <rect x="32" y="40" width="36" height="45" rx="6" fill="#0D061A" stroke="#A855F7" strokeWidth="2.5"/>
-          <path d="M32 50L18 65M68 50L82 65" stroke="#EC4899" strokeWidth="3.5" strokeLinecap="round"/>
-          <path d="M42 85L38 125M58 85L62 125" stroke="#A855F7" strokeWidth="4" strokeLinecap="round"/>
-        </svg>
-      </div>
-
-      <div className="robot-walker-3">
-        <svg className="w-20 h-28 sm:w-28 sm:h-36 drop-shadow-[0_0_20px_rgba(239,68,68,0.75)]" viewBox="0 0 100 140" fill="none">
-          <circle cx="50" cy="25" r="14" fill="#130924" stroke="#EF4444" strokeWidth="3"/>
-          <circle cx="50" cy="25" r="5" fill="#EC4899"/>
-          <rect x="35" y="42" width="30" height="48" rx="5" fill="#0D061A" stroke="#EF4444" strokeWidth="2.5"/>
-          <path d="M35 52L20 62M65 52L80 62" stroke="#EF4444" strokeWidth="3.5" strokeLinecap="round"/>
-          <path d="M42 90L40 125M58 90L60 125" stroke="#A855F7" strokeWidth="4" strokeLinecap="round"/>
-        </svg>
-      </div>
-
-      {/* ================= EFEK GALAKSI NEBULA UNGU-MERAH & BINTANG NEON ================= */}
+      {/* ========================================================================= */}
+      {/* LAYER BACKGROUND INTERAKTIF: ROBOT 1, ROBOT 2, ROBOT 3 SEBAGAI AMBIENT BG */}
+      {/* ========================================================================= */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-20 left-1/4 w-[520px] h-[520px] rounded-full bg-gradient-to-r from-purple-700/25 via-fuchsia-600/20 to-transparent blur-[150px]" />
-        <div className="absolute top-1/2 -right-20 w-[550px] h-[550px] rounded-full bg-gradient-to-l from-red-600/25 via-pink-600/20 to-transparent blur-[160px]" />
-        <div className="absolute bottom-0 left-10 w-[420px] h-[420px] rounded-full bg-gradient-to-tr from-violet-800/25 via-rose-600/15 to-transparent blur-[140px]" />
+        
+        {/* Cahaya Nebula Ungu & Crimson Red */}
+        <div className="absolute -top-24 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-700/30 via-fuchsia-600/20 to-transparent blur-[160px]" />
+        <div className="absolute top-1/3 -right-24 w-[600px] h-[600px] rounded-full bg-gradient-to-l from-red-600/30 via-pink-600/20 to-transparent blur-[160px]" />
+        <div className="absolute -bottom-24 left-10 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-violet-800/30 via-rose-600/20 to-transparent blur-[150px]" />
 
+        {/* 1. BACKGROUND KANAN ATAS: ROBOT 1 (ANDROID PEMEGANG TABLET) */}
+        {/* Menggunakan mix-blend-luminosity + radial-gradient mask agar background kotak-kotak putih hilang menyatu */}
+        <div
+          style={{
+            transform: `translate(${moveX * -1.2}px, ${moveY * -1.2}px) scale(${cyberOverdrive ? 1.08 : 1})`,
+            transition: "transform 0.25s ease-out",
+            WebkitMaskImage: "radial-gradient(circle at 55% 45%, black 25%, transparent 72%)",
+            maskImage: "radial-gradient(circle at 55% 45%, black 25%, transparent 72%)"
+          }}
+          className={`absolute -right-16 sm:-right-6 top-6 w-[440px] sm:w-[620px] h-[480px] sm:h-[650px] transition-opacity duration-500 ${
+            cyberOverdrive ? "opacity-55" : "opacity-30"
+          }`}
+        >
+          <img
+            src="/robot1.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center mix-blend-luminosity contrast-150 brightness-75 filter hue-rotate-[260deg]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#05020A] via-purple-600/40 to-red-500/40 mix-blend-color" />
+        </div>
+
+        {/* 2. BACKGROUND KIRI TENGAH: ROBOT 2 (WAJAH WIREFRAME AI & KODE BINER) */}
+        <div
+          style={{
+            transform: `translate(${moveX * 1.1}px, ${moveY * 0.9}px) scale(${cyberOverdrive ? 1.06 : 1})`,
+            transition: "transform 0.25s ease-out",
+            WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)",
+            maskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)"
+          }}
+          className={`absolute -left-24 sm:-left-10 top-[28%] w-[460px] sm:w-[680px] h-[420px] sm:h-[560px] transition-opacity duration-500 ${
+            cyberOverdrive ? "opacity-60" : "opacity-35"
+          }`}
+        >
+          <img
+            src="/robot2.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center mix-blend-screen contrast-125"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/45 via-pink-500/35 to-red-600/30 mix-blend-color" />
+        </div>
+
+        {/* 3. BACKGROUND KANAN BAWAH: ROBOT 3 (JABAT TANGAN WIREFRAME CYBERNETIC) */}
+        <div
+          style={{
+            transform: `translate(${moveX * -0.9}px, ${moveY * 1.2}px) scale(${cyberOverdrive ? 1.06 : 1})`,
+            transition: "transform 0.25s ease-out",
+            WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)",
+            maskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)"
+          }}
+          className={`absolute right-0 sm:right-10 bottom-[-40px] w-[460px] sm:w-[680px] h-[400px] sm:h-[520px] transition-opacity duration-500 ${
+            cyberOverdrive ? "opacity-60" : "opacity-35"
+          }`}
+        >
+          <img
+            src="/robot3.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center mix-blend-screen contrast-125"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-red-600/40 via-pink-600/35 to-purple-600/40 mix-blend-color" />
+        </div>
+
+        {/* Bintang Neon Berkelap-kelip */}
         <div className="absolute top-24 left-[12%] w-2.5 h-2.5 rounded-full bg-pink-500 star-neon-1" />
         <div className="absolute top-44 right-[22%] w-2 h-2 rounded-full bg-purple-400 star-neon-2" />
         <div className="absolute top-1/3 left-[38%] w-2.5 h-2.5 rounded-full bg-red-500 star-neon-3" />
@@ -443,26 +442,38 @@ export default function Home() {
       <div
         className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(680px circle at ${mousePos.x}px ${mousePos.y}px, rgba(217, 70, 239, 0.16), rgba(239, 68, 68, 0.08) 40%, transparent 75%)`
+          background: `radial-gradient(700px circle at ${mousePos.x}px ${mousePos.y}px, rgba(236, 72, 153, 0.18), rgba(239, 68, 68, 0.08) 40%, transparent 75%)`
         }}
       />
 
       {/* ================= TOP CYBERPUNK HUD BAR ================= */}
-      <div className="sticky top-0 z-40 bg-[#080411]/85 backdrop-blur-xl border-b border-purple-500/30 px-4 py-2.5 shadow-[0_4px_30px_rgba(168,85,247,0.15)]">
+      <div className="sticky top-0 z-40 bg-[#080312]/80 backdrop-blur-xl border-b border-purple-500/30 px-4 py-2.5 shadow-[0_4px_30px_rgba(168,85,247,0.15)]">
         <div className="max-w-[1220px] mx-auto flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono-tech tracking-wider uppercase">
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded bg-gradient-to-r from-purple-600/30 to-red-600/30 text-pink-400 border border-pink-500/50 font-bold shadow-[0_0_15px_rgba(236,72,153,0.3)]">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-              SYS.PORTFOLIO // v4.2
+              SYS.PORTFOLIO // v4.5
             </span>
             <span className="text-purple-300/70 hidden sm:inline">
               LOC: JAKARTA_SELATAN // ID
             </span>
           </div>
-          <div className="flex items-center gap-5 text-purple-200">
+
+          <div className="flex items-center gap-4 text-purple-200">
+            {/* Tombol Interaktif untuk Memperjelas Background Robot */}
+            <button
+              onClick={() => setCyberOverdrive(!cyberOverdrive)}
+              className={`px-3 py-0.5 rounded border text-[10px] font-bold transition cursor-pointer ${
+                cyberOverdrive
+                  ? "bg-red-600 text-white border-red-400 shadow-[0_0_15px_#EF4444]"
+                  : "bg-purple-950/70 text-pink-300 border-pink-500/40 hover:border-pink-400"
+              }`}
+            >
+              {cyberOverdrive ? "⚡ BG_ROBOT: HIGH_GLOW" : "👁️ BG_ROBOT: AMBIENT"}
+            </button>
             <span className="text-pink-400 font-bold">{sysTime}</span>
             <span className="hidden md:inline text-emerald-400 font-semibold">
-              ● NEURAL_LINK: ONLINE
+              ● ONLINE
             </span>
           </div>
         </div>
@@ -532,7 +543,7 @@ export default function Home() {
                   autoFocus
                   value={cliInput}
                   onChange={(e) => setCliInput(e.target.value)}
-                  placeholder="ketik 'help' atau 'robot' lalu Enter..."
+                  placeholder="ketik 'help' atau 'overdrive' lalu Enter..."
                   className="bg-transparent text-white focus:outline-none w-full"
                 />
               </form>
@@ -592,20 +603,20 @@ export default function Home() {
         </button>
       </div>
 
-      {/* ================= MAIN CONTAINER ================= */}
+      {/* ================= MAIN CONTAINER (GLASSMORPHISM AGAR BG ROBOT TERLIHAT) ================= */}
       <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
         
-        {/* ================= CYBERPUNK HERO SECTION (DENGAN ROBOT 1 INTERAKTIF) ================= */}
+        {/* ================= CYBERPUNK HERO SECTION ================= */}
         <section
           id="about"
-          className="bg-[#0C051A]/90 backdrop-blur-2xl rounded-[2rem] overflow-hidden shadow-[0_0_80px_-15px_rgba(168,85,247,0.35)] border border-purple-500/35 relative"
+          className="bg-[#0B0418]/70 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_0_80px_-15px_rgba(168,85,247,0.4)] border border-purple-500/35 relative"
         >
           <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-pink-500 pointer-events-none z-20" />
           <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-red-500 pointer-events-none z-20" />
           <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-purple-400 pointer-events-none z-20" />
           <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-pink-500 pointer-events-none z-20" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[640px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[600px]">
             
             {/* KOLOM KIRI: IDENTITAS & BIO */}
             <div className="lg:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-between relative z-10">
@@ -674,30 +685,10 @@ export default function Home() {
                   <a
                     href="/cv.pdf"
                     download="CV_Muhamad_Rafi_Ramadhan.pdf"
-                    className="px-6 py-3.5 rounded-xl bg-[#170B2C] text-purple-100 border border-purple-500/40 text-xs font-mono-tech font-bold uppercase tracking-widest hover:bg-purple-900/40 hover:border-pink-500 transition-all"
+                    className="px-6 py-3.5 rounded-xl bg-[#170B2C]/90 text-purple-100 border border-purple-500/40 text-xs font-mono-tech font-bold uppercase tracking-widest hover:bg-purple-900/40 hover:border-pink-500 transition-all"
                   >
                     📄 Download CV
                   </a>
-                </div>
-
-                {/* Kartu Mini Foto Profil Asli */}
-                <div className="mt-8 p-3.5 rounded-2xl bg-[#130826]/90 border border-purple-500/30 flex items-center gap-4 max-w-md shadow-lg">
-                  <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-pink-500 shrink-0 relative">
-                    <img
-                      src="/fotoprofile.jpg"
-                      alt="Muhamad Rafi Ramadhan"
-                      className="w-full h-full object-cover object-top scale-110"
-                    />
-                  </div>
-                  <div className="text-xs font-mono-tech">
-                    <div className="text-white font-bold flex items-center gap-2">
-                      <span>OPERATOR: M. RAFI RAMADHAN</span>
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    </div>
-                    <p className="text-purple-300/80 text-[11px] mt-0.5">
-                      S1 Information Systems • Open for Work &amp; Projects
-                    </p>
-                  </div>
                 </div>
               </div>
 
@@ -718,7 +709,7 @@ export default function Home() {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 bg-[#160A2A] text-purple-100 rounded-lg border border-purple-500/30 hover:border-pink-500 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:-translate-y-0.5 transition-all cursor-default"
+                      className="px-3 py-1.5 bg-[#160A2A]/90 text-purple-100 rounded-lg border border-purple-500/30 hover:border-pink-500 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:-translate-y-0.5 transition-all cursor-default"
                     >
                       {tech}
                     </span>
@@ -727,70 +718,48 @@ export default function Home() {
               </div>
             </div>
 
-            {/* KOLOM KANAN: GAMBAR ROBOT 1 INTERAKTIF (robot1.jpg) */}
-            <div className="lg:col-span-5 bg-gradient-to-b from-[#17072B] via-[#240830] to-[#12041C] p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden border-t lg:border-t-0 lg:border-l border-purple-500/30">
+            {/* KOLOM KANAN: FOTO PROFIL ASLI DENGAN BINGKAI HOLOGRAM CYBERPUNK */}
+            {/* Transparan agar siluet Robot 1 di background tetap tembus terlihat */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-purple-950/35 via-pink-950/25 to-red-950/35 p-8 sm:p-10 flex flex-col justify-between items-center relative overflow-hidden border-t lg:border-t-0 lg:border-l border-purple-500/30">
               
               {/* Garis Neon Horizontal Cyberpunk ala Dozfx */}
-              <div className="absolute inset-x-0 top-16 space-y-3 pointer-events-none opacity-45">
+              <div className="absolute inset-x-0 top-14 space-y-3 pointer-events-none opacity-45">
                 <div className="h-1.5 w-full bg-gradient-to-r from-transparent via-pink-500 to-transparent blur-[1px]" />
-                <div className="h-3 w-4/5 mx-auto bg-gradient-to-r from-transparent via-red-500 to-transparent blur-[2px]" />
-                <div className="h-1 w-full bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
+                <div className="h-2.5 w-4/5 mx-auto bg-gradient-to-r from-transparent via-red-500 to-transparent blur-[2px]" />
               </div>
 
-              <div className="relative z-10 flex items-center justify-between text-[11px] font-mono-tech">
+              <div className="w-full relative z-10 flex items-center justify-between text-[11px] font-mono-tech">
                 <span className="px-2.5 py-1 rounded bg-black/50 border border-pink-500/40 text-pink-400 font-bold">
-                  ASSET // ROBOT_01
+                  ID // M_RAFI_R
                 </span>
-                <span className="text-red-400 font-bold animate-pulse">
-                  ● INTERACTIVE_UNIT
+                <span className="text-emerald-400 font-bold">
+                  ● VERIFIED_DEV
                 </span>
               </div>
 
-              {/* GAMBAR ROBOT 1 DENGAN EFEK PARALLAX MOUSE & SCANLINE */}
-              <div
-                onClick={handleRobotInteract}
-                title="Klik Robot untuk Interaksi!"
-                className="my-6 relative z-10 flex flex-col items-center justify-center cursor-pointer group select-none"
-              >
-                {/* Lingkaran Orbit Cybernetic */}
-                <div className="absolute w-72 h-72 rounded-full border border-dashed border-pink-500/40 animate-orbit-cw pointer-events-none" />
-                <div className="absolute w-80 h-80 rounded-full border border-purple-500/25 animate-orbit-ccw pointer-events-none" />
-                <div className="absolute w-64 h-64 rounded-full bg-gradient-to-tr from-purple-600/40 via-pink-500/30 to-red-600/40 blur-2xl animate-pulse pointer-events-none" />
+              {/* Bingkai Lingkaran Hologram Foto Profil */}
+              <div className="my-8 relative flex items-center justify-center group">
+                <div className="absolute w-72 h-72 sm:w-80 sm:h-80 rounded-full border border-dashed border-pink-500/45 animate-orbit-cw pointer-events-none" />
+                <div className="absolute w-80 h-80 sm:w-88 sm:h-88 rounded-full border border-purple-500/25 animate-orbit-ccw pointer-events-none" />
 
-                {/* Container Gambar robot1.jpg yang Bergerak Mengikuti Mouse */}
-                <div
-                  style={{
-                    transform: `translate(${moveX}px, ${moveY}px)`,
-                    transition: "transform 0.15s ease-out"
-                  }}
-                  className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-pink-500/50 shadow-[0_0_45px_rgba(236,72,153,0.45)] group-hover:border-red-500 group-hover:scale-[1.03] transition-all duration-500 bg-[#0D0518]"
-                >
-                  <img
-                    src="/robot1.jpg"
-                    alt="Interactive Cybernetic Robot 1"
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
-                  />
-                  {/* Filter Blending Cyberpunk Ungu-Merah & Scanline */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C051A] via-purple-900/15 to-transparent pointer-events-none" />
-                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-pink-500/35 to-transparent animate-scanline pointer-events-none" />
-
-                  {/* Indikator HUD di atas Gambar Robot 1 */}
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md border border-pink-500/40 text-[10px] font-mono-tech text-pink-300">
-                    <span>👆 KLIK ROBOT (MODE)</span>
-                    <span className="text-emerald-400 font-bold">ACTIVE</span>
+                <div className="w-60 h-60 sm:w-68 sm:h-68 rounded-full p-2 bg-gradient-to-tr from-purple-600 via-pink-500 to-red-500 shadow-[0_0_50px_rgba(236,72,153,0.5)] relative z-10">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-[#0A0414] relative">
+                    <img
+                      src="/fotoprofile.jpg"
+                      alt="Muhamad Rafi Ramadhan"
+                      className="w-full h-full object-cover object-top scale-110 group-hover:scale-125 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-950/50 via-transparent to-transparent pointer-events-none" />
                   </div>
                 </div>
               </div>
 
-              {/* Kotak Dialog Telemetri Robot 1 */}
-              <div className="relative z-10 bg-black/65 backdrop-blur-md p-4 rounded-2xl border border-pink-500/40 font-mono-tech text-xs">
-                <div className="flex items-center justify-between text-[10px] text-pink-400 font-bold mb-1">
-                  <span>MODE // {robotMode}</span>
-                  <span>SYS_01</span>
-                </div>
-                <p className="text-purple-100 text-[11px] leading-relaxed">
-                  {robotSpeech}
-                </p>
+              <div className="w-full relative z-10 bg-black/60 backdrop-blur-md px-4 py-3 rounded-2xl border border-pink-500/40 flex items-center justify-between font-mono-tech text-xs">
+                <span className="text-purple-200 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  Available for Work
+                </span>
+                <span className="text-pink-400 font-bold">Jakarta Selatan</span>
               </div>
 
             </div>
@@ -798,7 +767,7 @@ export default function Home() {
         </section>
 
         {/* ================= RUNNING CYBERPUNK TICKER ================= */}
-        <div className="mt-6 bg-[#0D051D] border border-purple-500/30 rounded-xl py-3 overflow-hidden shadow-[0_0_25px_rgba(168,85,247,0.15)]">
+        <div className="mt-6 bg-[#0D051D]/80 backdrop-blur-md border border-purple-500/30 rounded-xl py-3 overflow-hidden shadow-[0_0_25px_rgba(168,85,247,0.15)]">
           <div className="animate-marquee-hud font-cyber text-[11px] uppercase tracking-[0.25em] text-purple-300">
             <div className="flex items-center gap-8 px-4 shrink-0">
               <span className="text-pink-500 font-bold">
@@ -846,7 +815,7 @@ export default function Home() {
         {/* ================= SKILLS & TECHNICAL TOOLKIT ================= */}
         <section
           id="skills"
-          className="mt-12 bg-[#0C051A]/90 backdrop-blur-xl rounded-[2rem] p-8 sm:p-12 shadow-2xl border border-purple-500/30 scroll-mt-20 relative"
+          className="mt-12 bg-[#0B0418]/70 backdrop-blur-md rounded-[2rem] p-8 sm:p-12 shadow-2xl border border-purple-500/30 scroll-mt-20 relative"
         >
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-mono-tech uppercase tracking-widest font-extrabold text-pink-400 bg-pink-500/10 px-3.5 py-1 rounded border border-pink-500/30">
@@ -869,7 +838,7 @@ export default function Home() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono-tech font-bold border hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer ${
                   activeCategory === cat
                     ? "bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white border-pink-400 shadow-[0_0_25px_rgba(236,72,153,0.5)]"
-                    : "bg-[#150928] text-purple-200 border-purple-500/30 hover:border-pink-500 hover:text-white"
+                    : "bg-[#150928]/80 text-purple-200 border-purple-500/30 hover:border-pink-500 hover:text-white"
                 }`}
               >
                 {cat}
@@ -881,7 +850,7 @@ export default function Home() {
             {filteredSkills.map((skill, index) => (
               <div
                 key={index}
-                className="bg-[#120724]/90 border border-purple-500/25 rounded-2xl p-6 flex flex-col justify-between hover:border-pink-500 hover:shadow-[0_0_35px_rgba(236,72,153,0.25)] hover:-translate-y-1.5 transition-all duration-300 group relative overflow-hidden"
+                className="bg-[#120724]/80 backdrop-blur-sm border border-purple-500/25 rounded-2xl p-6 flex flex-col justify-between hover:border-pink-500 hover:shadow-[0_0_35px_rgba(236,72,153,0.25)] hover:-translate-y-1.5 transition-all duration-300 group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-pink-500/25 to-transparent pointer-events-none" />
 
@@ -938,46 +907,23 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ================= TECHNICAL FOCUS & GAMBAR ROBOT 2 (WAJAH WIREFRAME BINER) ================= */}
+        {/* ================= TECHNICAL FOCUS ================= */}
         <section
           id="expertise"
-          className="mt-12 bg-[#0A0415] text-white rounded-[2rem] p-8 sm:p-12 lg:p-14 shadow-2xl border border-purple-500/30 relative overflow-hidden"
+          className="mt-12 bg-[#0A0415]/70 backdrop-blur-md text-white rounded-[2rem] p-8 sm:p-12 lg:p-14 shadow-2xl border border-purple-500/30 relative overflow-hidden"
         >
-          {/* Showcase Visual Robot 2 (Wajah AI Wireframe & Kode Biner) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-10 border-b border-purple-500/25">
-            <div className="lg:col-span-7 space-y-4">
+          <div className="pb-10 border-b border-purple-500/25 flex flex-col md:flex-row md:items-baseline justify-between gap-6">
+            <div className="shrink-0">
               <span className="inline-flex items-center text-xs font-mono-tech uppercase tracking-widest font-extrabold text-pink-400 bg-pink-500/10 px-3.5 py-1 rounded border border-pink-500/30">
                 Technical Focus // Neural Mesh
               </span>
-              <h2 className="font-cyber text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
-                Arsitektur Kode &amp; Rekayasa Sistem
-              </h2>
-              <p className="text-sm sm:text-base text-purple-200/80 leading-relaxed text-justify m-0">
-                Pendekatan komprehensif dalam rekayasa perangkat lunak—mencakup
-                pengembangan antarmuka reaktif, arsitektur backend andal,
-                perancangan basis data relasional, hingga manajemen versi kode
-                sumber berstandar industri.
-              </p>
             </div>
-
-            {/* Panel Gambar robot2.jpg Interaktif */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border-2 border-purple-500/40 shadow-[0_0_40px_rgba(168,85,247,0.3)] group">
-                <img
-                  src="/robot2.jpg"
-                  alt="AI Wireframe Matrix Robot 2"
-                  className="w-full h-52 sm:h-60 object-cover object-center group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-purple-950/70 via-pink-600/20 to-red-600/25 mix-blend-color pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0415] via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono-tech text-pink-300">
-                  <span>FIG. 02 // NEURAL_MATRIX_CORE</span>
-                  <span className="px-2 py-0.5 rounded bg-pink-500/20 border border-pink-500/40">
-                    11010110
-                  </span>
-                </div>
-              </div>
-            </div>
+            <p className="text-sm sm:text-base text-purple-200/80 leading-relaxed max-w-2xl m-0">
+              Pendekatan komprehensif dalam rekayasa perangkat lunak—mencakup
+              pengembangan antarmuka reaktif, arsitektur backend andal,
+              perancangan basis data relasional, hingga manajemen versi kode
+              sumber berstandar industri.
+            </p>
           </div>
 
           <div className="divide-y divide-purple-500/20 mt-4">
@@ -1058,10 +1004,10 @@ export default function Home() {
             {projects.map((proj, idx) => (
               <div
                 key={idx}
-                className="bg-[#0D061C]/95 rounded-3xl p-7 sm:p-9 border border-purple-500/30 hover:border-pink-500 shadow-xl hover:shadow-[0_0_50px_rgba(236,72,153,0.25)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group relative overflow-hidden"
+                className="bg-[#0D061C]/75 backdrop-blur-md rounded-3xl p-7 sm:p-9 border border-purple-500/30 hover:border-pink-500 shadow-xl hover:shadow-[0_0_50px_rgba(236,72,153,0.25)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group relative overflow-hidden"
               >
                 <div>
-                  <div className="aspect-[16/10] bg-gradient-to-br from-[#16082B] via-[#0B0415] to-[#260720] rounded-2xl border border-purple-500/30 p-8 flex flex-col justify-between mb-6 relative overflow-hidden group-hover:border-pink-500 transition-colors">
+                  <div className="aspect-[16/10] bg-gradient-to-br from-[#16082B]/90 via-[#0B0415]/90 to-[#260720]/90 rounded-2xl border border-purple-500/30 p-8 flex flex-col justify-between mb-6 relative overflow-hidden group-hover:border-pink-500 transition-colors">
                     <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-pink-500/20 to-transparent animate-scanline pointer-events-none" />
 
                     <div className="flex items-center justify-between z-10">
@@ -1141,13 +1087,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ================= WORKFLOW & BANNER KONTAK (DENGAN GAMBAR ROBOT 3) ================= */}
+        {/* ================= WORKFLOW & BANNER KONTAK ================= */}
         <section className="mt-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {workflows.map((wf, idx) => (
               <div
                 key={idx}
-                className="bg-[#0C051A]/90 rounded-3xl p-7 border border-purple-500/30 hover:border-pink-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                className="bg-[#0C051A]/75 backdrop-blur-md rounded-3xl p-7 border border-purple-500/30 hover:border-pink-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -1174,10 +1120,9 @@ export default function Home() {
             ))}
           </div>
 
-          {/* ================= BANNER KOLABORASI & KONTAK (DENGAN ROBOT 3 WIREFRAME HANDSHAKE) ================= */}
           <div
             id="contact"
-            className="mt-10 bg-[#0C051A] rounded-[2rem] p-8 sm:p-12 border-2 border-purple-500/50 animate-pulse-cyber grid grid-cols-1 lg:grid-cols-12 gap-8 items-center scroll-mt-20"
+            className="mt-10 bg-[#0C051A]/75 backdrop-blur-md rounded-[2rem] p-8 sm:p-12 border-2 border-purple-500/50 animate-pulse-cyber grid grid-cols-1 lg:grid-cols-12 gap-8 items-center scroll-mt-20"
           >
             <div className="lg:col-span-5 space-y-4">
               <span className="text-xs font-mono-tech font-extrabold uppercase tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded border border-pink-500/30">
@@ -1186,27 +1131,16 @@ export default function Home() {
               <h3 className="font-cyber text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight uppercase">
                 Mari Bangun Sistem Aplikasi Anda Berikutnya
               </h3>
-
-              {/* Gambar Robot 3 (Wireframe Handshake) */}
-              <div className="relative rounded-2xl overflow-hidden border border-pink-500/40 shadow-[0_0_30px_rgba(236,72,153,0.25)] group my-3">
-                <img
-                  src="/robot3.jpg"
-                  alt="Cybernetic Wireframe Handshake Robot 3"
-                  className="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-transparent to-red-900/40 mix-blend-color pointer-events-none" />
-                <div className="absolute bottom-2 left-3 text-[10px] font-mono-tech text-pink-300 bg-black/70 px-2.5 py-0.5 rounded border border-pink-500/30">
-                  FIG. 03 // TRUST_CONNECTION_ESTABLISHED
-                </div>
-              </div>
-
               <p className="text-purple-200/80 text-xs sm:text-sm leading-relaxed text-justify">
                 Terbuka untuk peluang kerja Full-Time, Part-Time, Magang, maupun
                 kolaborasi pengembangan proyek Web &amp; Mobile di area Jakarta
                 Selatan dan sekitarnya.
               </p>
-
-              <div className="pt-2 flex flex-wrap gap-3 font-mono-tech">
+              <div className="pt-2 space-y-2 text-xs font-mono-tech text-purple-200">
+                <p>📍 Jakarta Selatan, DKI Jakarta, Indonesia</p>
+                <p>🎓 Undergraduate in Information Systems (S1 Sistem Informasi)</p>
+              </div>
+              <div className="pt-3 flex flex-wrap gap-3 font-mono-tech">
                 <a
                   href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                   target="_blank"
@@ -1240,7 +1174,7 @@ export default function Home() {
                       name="name"
                       required
                       placeholder="Nama Anda"
-                      className="w-full px-4 py-3 rounded-xl bg-[#150826] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
+                      className="w-full px-4 py-3 rounded-xl bg-[#150826]/90 border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
                     />
                   </div>
                   <div>
@@ -1252,7 +1186,7 @@ export default function Home() {
                       name="email"
                       required
                       placeholder="email@perusahaan.com"
-                      className="w-full px-4 py-3 rounded-xl bg-[#150826] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
+                      className="w-full px-4 py-3 rounded-xl bg-[#150826]/90 border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
                     />
                   </div>
                 </div>
@@ -1265,7 +1199,7 @@ export default function Home() {
                     rows={4}
                     required
                     placeholder="Halo Rafi, kami tertarik untuk mendiskusikan..."
-                    className="w-full px-4 py-3 rounded-xl bg-[#150826] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
+                    className="w-full px-4 py-3 rounded-xl bg-[#150826]/90 border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
                   />
                 </div>
                 <button
@@ -1280,7 +1214,7 @@ export default function Home() {
         </section>
 
         {/* ================= FOOTER ================= */}
-        <footer className="mt-16 bg-[#080311] text-purple-300/70 rounded-3xl p-8 sm:p-12 shadow-2xl border border-purple-500/25">
+        <footer className="mt-16 bg-[#080311]/80 backdrop-blur-md text-purple-300/70 rounded-3xl p-8 sm:p-12 shadow-2xl border border-purple-500/25">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-8 border-b border-purple-500/20">
             <div>
               <p className="text-xs text-white font-cyber font-bold tracking-wider">
