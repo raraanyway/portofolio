@@ -6,18 +6,24 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [quickActionOpen, setQuickActionOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 500, y: 300 });
-  const [sysTime, setSysTime] = useState("14:00:00 WIB");
+  const [mousePos, setMousePos] = useState({ x: 600, y: 350 });
+  const [sysTime, setSysTime] = useState("20:00:00 WIB");
+
+  // State untuk Robot Android Interaktif (robot1)
+  const [robotMode, setRobotMode] = useState("ANALYZING_SYSTEM");
+  const [robotSpeech, setRobotSpeech] = useState(
+    "ANDROID_UNIT // 09: Menginisialisasi antarmuka portofolio Muhamad Rafi Ramadhan. Klik gambar robot untuk mengganti mode operasi."
+  );
 
   // State untuk Interactive CLI Terminal Modal
   const [cliOpen, setCliOpen] = useState(false);
   const [cliInput, setCliInput] = useState("");
   const [cliHistory, setCliHistory] = useState([
-    { type: "system", text: "MRR Portfolio OS — Interactive Developer Terminal" },
-    { type: "system", text: "Ketik 'help' untuk melihat daftar perintah yang tersedia." }
+    { type: "system", text: "MRR CYBER-OS v4.2 — Neural Developer Terminal" },
+    { type: "system", text: "Ketik 'help' untuk melihat daftar perintah sistem." }
   ]);
 
-  // Efek Pelacak Kursor & Jam Real-Time WIB
+  // Pelacak Kursor & Jam Real-Time WIB
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
@@ -38,17 +44,57 @@ export default function Home() {
     };
   }, []);
 
+  // Kalkulasi Parallax Interaktif Mengikuti Kursor Mouse
+  const moveX =
+    typeof window !== "undefined"
+      ? ((mousePos.x - window.innerWidth / 2) / window.innerWidth) * 18
+      : 0;
+  const moveY =
+    typeof window !== "undefined"
+      ? ((mousePos.y - window.innerHeight / 2) / window.innerHeight) * 14
+      : 0;
+
+  // Fungsi Saat Gambar Robot 1 Diklik (Interaktif)
+  const handleRobotInteract = () => {
+    const modes = [
+      {
+        mode: "COMBAT_RED_OVERDRIVE",
+        speech:
+          "OVERDRIVE AKTIF // Menampilkan rekam jejak Full-Stack Web, Mobile UX, dan arsitektur Relational Database."
+      },
+      {
+        mode: "NEURAL_SCAN_COMPLETE",
+        speech:
+          "SCAN SELESAI // 11 Keahlian utama terverifikasi: Next.js, React, Laravel, Node.js, MySQL, dan REST API."
+      },
+      {
+        mode: "READY_FOR_HIRE",
+        speech:
+          "STATUS: ONLINE // Muhamad Rafi Ramadhan siap berkolaborasi untuk proyek Web & Mobile di Jakarta Selatan."
+      },
+      {
+        mode: "ANALYZING_SYSTEM",
+        speech:
+          "ANDROID_UNIT // 09: Memantau telemetri sistem dan repositori GitHub secara real-time."
+      }
+    ];
+    const currentIndex = modes.findIndex((m) => m.mode === robotMode);
+    const next = modes[(currentIndex + 1) % modes.length];
+    setRobotMode(next.mode);
+    setRobotSpeech(next.speech);
+  };
+
   // ================= DATA PRIBADI =================
   const whatsappNumber = "6282246971567";
   const whatsappMessage = encodeURIComponent(
-    "Halo Rafi, saya melihat portofolio Anda dan tertarik untuk berdiskusi."
+    "Halo Rafi, saya melihat portofolio Cyberpunk Anda dan tertarik untuk berdiskusi."
   );
 
   const myEmail = "rafi25ramadhan@gmail.com";
-  const myLinkedin = "https://www.linkedin.com/in/muhamad-rafi-ramadhan-955ba82ab";
+  const myLinkedin =
+    "https://www.linkedin.com/in/muhamad-rafi-ramadhan-955ba82ab";
   const myGithub = "https://github.com/raraanyway";
 
-  // Kategori Filter Toolkit
   const categories = [
     "All",
     "Languages",
@@ -58,7 +104,6 @@ export default function Home() {
     "Tools & DevOps"
   ];
 
-  // 11 Keahlian dengan Logo Software Resmi
   const skillsData = [
     {
       code: "01",
@@ -99,7 +144,7 @@ export default function Home() {
       logos: [
         "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
       ],
-      desc: "Utility-first responsive layouts, custom color tokens, and fluid editorial micro-interactions."
+      desc: "Utility-first responsive layouts, custom neon tokens, and fluid editorial micro-interactions."
     },
     {
       code: "05",
@@ -107,7 +152,7 @@ export default function Home() {
       category: "Mobile & Native",
       level: "88%",
       customSvg: "mobile",
-      desc: "Adaptive UI patterns, fluid screen responsiveness, and modern light/dark user theming."
+      desc: "Adaptive UI patterns, fluid screen responsiveness, and modern cyberpunk/dark user theming."
     },
     {
       code: "06",
@@ -177,11 +222,10 @@ export default function Home() {
       ? skillsData
       : skillsData.filter((skill) => skill.category === activeCategory);
 
-  // 5 Poin Technical Focus
   const expertiseList = [
     {
       id: 0,
-      code: "01",
+      code: "SYS // 01",
       title: "Frontend & Responsive Web Development",
       description:
         "Menguasai pengembangan antarmuka web modern menggunakan HTML5 semantik, JavaScript (ES6+), serta framework terdepan seperti React.js dan Next.js. Implementasi desain responsif dikombinasikan secara optimal menggunakan utility-first Tailwind CSS untuk menghasilkan layout yang cepat, fleksibel, estetis, dan memiliki aksesibilitas (a11y) tinggi di berbagai ukuran layar perangkat.",
@@ -189,7 +233,7 @@ export default function Home() {
     },
     {
       id: 1,
-      code: "02",
+      code: "SYS // 02",
       title: "Mobile App Interface & Cross-Platform UX",
       description:
         "Merancang struktur navigasi dan pola tata letak antarmuka aplikasi mobile yang intuitif dan adaptif. Berfokus pada fluiditas sentuhan (touch gestures), manajemen status komponen yang reaktif, serta penerapan konsistensi tema visual terang dan gelap guna memberikan kenyamanan optimal bagi pengguna perangkat bergerak (mobile users).",
@@ -197,7 +241,7 @@ export default function Home() {
     },
     {
       id: 2,
-      code: "03",
+      code: "SYS // 03",
       title: "Backend & RESTful API Engineering",
       description:
         "Membangun logika server-side yang tangguh, aman, dan modular menggunakan ekosistem PHP dengan framework Laravel serta JavaScript via Node.js dan Express.js. Berpengalaman dalam merancang arsitektur MVC, sistem autentikasi pengguna yang aman, middleware pipelines, serta pengelolaan endpoint REST API untuk pertukaran data yang efisien.",
@@ -205,7 +249,7 @@ export default function Home() {
     },
     {
       id: 3,
-      code: "04",
+      code: "SYS // 04",
       title: "Database Design & Relational Modeling",
       description:
         "Merancang struktur basis data relasional yang efisien dan ternormalisasi menggunakan MySQL serta embedded storage SQLite. Menerapkan strategi pengindeksan terarah, pemeliharaan integritas transaksi ACID, optimalisasi query SQL kompleks, serta penerjemahan kebutuhan alur operasional bisnis nyata menjadi skema tabel yang terstruktur rapi.",
@@ -213,7 +257,7 @@ export default function Home() {
     },
     {
       id: 4,
-      code: "05",
+      code: "SYS // 05",
       title: "Version Control, Tooling & Bundlers",
       description:
         "Mengelola siklus hidup kode sumber dan kolaborasi tim secara profesional menggunakan alur kerja Git & GitHub (branching strategy, atomic commits, dan merge conflict resolution). Memanfaatkan bundler berperangkat tinggi seperti Vite dan Next.js untuk mempercepat proses Hot Module Replacement (HMR) serta mengotomasi optimasi build menuju tahap produksi.",
@@ -221,39 +265,31 @@ export default function Home() {
     }
   ];
 
-  // Data Proyek
   const projects = [
     {
       id: "laundry",
-      code: "PROJECT // 01",
+      code: "NODE // 01",
       title: "R&F Express – Laundry Operating System & Kanban Tracker",
       subtitle: "Web Application • Operations",
       category: "Full-Stack Web",
       stack: ["PHP", "MySQL", "Tailwind CSS", "JavaScript"],
       description:
         "Sistem informasi binatu komprehensif yang mengintegrasikan pelacakan cucian real-time melalui papan Kanban visual, rekapitulasi data kasir otomatis, dan perhitungan beban inventaris harian.",
-      bgColor: "bg-[#0B0E1A]",
-      isDarkBg: true,
-      githubUrl: myGithub,
-      demoUrl: "#"
+      githubUrl: myGithub
     },
     {
       id: "unitrade",
-      code: "PROJECT // 02",
+      code: "NODE // 02",
       title: "UniTrade – Campus E-Commerce & Student Trading Forum",
       subtitle: "Mobile Application • Community Marketplace",
       category: "Mobile Platform",
       stack: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "REST API"],
       description:
         "Aplikasi mobile marketplace dan forum jual-beli khusus civitas kampus untuk transaksi barang bekas terverifikasi, modul ajar, dan perlengkapan perkuliahan secara aman antar mahasiswa/i.",
-      bgColor: "bg-[#F8F6F2]",
-      isDarkBg: false,
-      githubUrl: "https://github.com/raraanyway/UniTrade",
-      demoUrl: "#"
+      githubUrl: "https://github.com/raraanyway/UniTrade"
     }
   ];
 
-  // Alur Kerja Pengembangan
   const workflows = [
     {
       step: "01",
@@ -281,7 +317,6 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Fungsi Eksekusi Perintah CLI Terminal
   const handleCliSubmit = (e) => {
     e.preventDefault();
     const cmd = cliInput.trim().toLowerCase();
@@ -289,18 +324,18 @@ export default function Home() {
 
     const newHistory = [
       ...cliHistory,
-      { type: "user", text: `rafi@portfolio:~$ ${cliInput}` }
+      { type: "user", text: `rafi@cyber-os:~$ ${cliInput}` }
     ];
 
     if (cmd === "help") {
       newHistory.push({
         type: "output",
-        text: "Perintah tersedia: about | skills | projects | location | whatsapp | contact | clear"
+        text: "Perintah tersedia: about | skills | projects | robot | location | whatsapp | contact | clear"
       });
     } else if (cmd === "about") {
       newHistory.push({
         type: "output",
-        text: "Muhamad Rafi Ramadhan — Web & Mobile Developer, Mahasiswa S1 Sistem Informasi."
+        text: "Muhamad Rafi Ramadhan — Web & Mobile Developer, Mahasiswa aktif S1 Sistem Informasi."
       });
     } else if (cmd === "skills") {
       newHistory.push({
@@ -310,7 +345,13 @@ export default function Home() {
     } else if (cmd === "projects") {
       newHistory.push({
         type: "output",
-        text: "1. R&F Express Laundry OS | 2. UniTrade Mobile E-Commerce App (github.com/raraanyway/UniTrade)"
+        text: "1. R&F Express Laundry OS | 2. UniTrade Mobile E-Commerce App"
+      });
+    } else if (cmd === "robot") {
+      handleRobotInteract();
+      newHistory.push({
+        type: "output",
+        text: "Mengubah status Android Cybernetic (robot1) di Hero Section..."
       });
     } else if (cmd === "location") {
       newHistory.push({
@@ -320,7 +361,7 @@ export default function Home() {
     } else if (cmd === "whatsapp" || cmd === "wa") {
       newHistory.push({
         type: "output",
-        text: "Membuka tautan WhatsApp..."
+        text: "Membuka jalur komunikasi WhatsApp..."
       });
       window.open(
         `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
@@ -347,166 +388,81 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07080C] text-[#F4F2ED] selection:bg-[#E84A27] selection:text-white relative overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-[#06030C] text-[#F5F0FF] selection:bg-[#EC4899] selection:text-white relative overflow-x-hidden">
       
-      {/* ================= ANIMASI ROBOT WALKER & EFEK BINTANG NEON DI BACKGROUND ================= */}
-      <style>{`
-        @keyframes walkRobot1 {
-          0% { transform: translateX(-180px) translateY(0px) scale(0.7); opacity: 0.15; }
-          25% { transform: translateX(25vw) translateY(-8px) scale(0.7); }
-          50% { transform: translateX(50vw) translateY(0px) scale(0.7); opacity: 0.35; }
-          75% { transform: translateX(75vw) translateY(-8px) scale(0.7); }
-          100% { transform: translateX(110vw) translateY(0px) scale(0.7); opacity: 0.15; }
-        }
-        @keyframes walkRobot2 {
-          0% { transform: translateX(110vw) translateY(0px) scale(0.55) scaleX(-1); opacity: 0.1; }
-          50% { transform: translateX(40vw) translateY(-6px) scale(0.55) scaleX(-1); opacity: 0.3; }
-          100% { transform: translateX(-180px) translateY(0px) scale(0.55) scaleX(-1); opacity: 0.1; }
-        }
-        @keyframes walkRobot3 {
-          0% { transform: translateX(-200px) translateY(0px) scale(0.65); opacity: 0.12; }
-          50% { transform: translateX(60vw) translateY(-10px) scale(0.65); opacity: 0.28; }
-          100% { transform: translateX(110vw) translateY(0px) scale(0.65); opacity: 0.12; }
-        }
-        .robot-walker-1 {
-          position: fixed;
-          bottom: 12%;
-          z-index: 1;
-          pointer-events: none;
-          animation: walkRobot1 32s linear infinite;
-        }
-        .robot-walker-2 {
-          position: fixed;
-          bottom: 38%;
-          z-index: 1;
-          pointer-events: none;
-          animation: walkRobot2 40s linear infinite;
-        }
-        .robot-walker-3 {
-          position: fixed;
-          bottom: 65%;
-          z-index: 1;
-          pointer-events: none;
-          animation: walkRobot3 36s linear infinite;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 6px rgba(232, 74, 39, 0.8)); }
-        }
-        .star-neon-1 { animation: twinkle 3s ease-in-out infinite; }
-        .star-neon-2 { animation: twinkle 4.5s ease-in-out infinite 1.5s; }
-        .star-neon-3 { animation: twinkle 2.5s ease-in-out infinite 0.7s; }
-        @keyframes scanline {
-          0% { transform: translateY(-100%); opacity: 0; }
-          40% { opacity: 0.6; }
-          60% { opacity: 0.6; }
-          100% { transform: translateY(500%); opacity: 0; }
-        }
-        @keyframes orbit-cw {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes orbit-ccw {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
-        @keyframes pulse-border {
-          0%, 100% { border-color: rgba(232, 74, 39, 0.35); box-shadow: 0 0 15px rgba(232, 74, 39, 0.08); }
-          50% { border-color: rgba(232, 74, 39, 0.85); box-shadow: 0 0 28px rgba(232, 74, 39, 0.28); }
-        }
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-6px); }
-        }
-        @keyframes marquee-hud {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scanline { animation: scanline 5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-        .animate-orbit-cw { animation: orbit-cw 24s linear infinite; }
-        .animate-orbit-ccw { animation: orbit-ccw 18s linear infinite; }
-        .animate-pulse-border { animation: pulse-border 3.5s ease-in-out infinite; }
-        .animate-float-slow { animation: float-slow 5s ease-in-out infinite; }
-        .animate-marquee-hud { display: flex; width: 200%; animation: marquee-hud 30s linear infinite; }
-        .tech-grid-bg {
-          background-size: 48px 48px;
-          background-image: 
-            linear-gradient(to right, rgba(232, 74, 39, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(232, 74, 39, 0.05) 1px, transparent 1px);
-        }
-      `}</style>
-
-      {/* ================= 3 ROBOT FUTURISTIK VECTOR DI BACKGROUND ================= */}
+      {/* ================= 3 ROBOT CYBERPUNK DI BACKGROUND ================= */}
       <div className="robot-walker-1">
-        <svg className="w-24 h-32 sm:w-32 sm:h-44 drop-shadow-[0_0_15px_rgba(232,74,39,0.5)]" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="25" r="18" fill="#1C2030" stroke="#E84A27" strokeWidth="3"/>
-          <path d="M40 22C45 20 55 20 60 22" stroke="#E57C23" strokeWidth="2" strokeLinecap="round"/>
-          <circle cx="43" cy="24" r="2.5" fill="#E84A27"/>
-          <circle cx="57" cy="24" r="2.5" fill="#E84A27"/>
-          <rect x="30" y="45" width="40" height="50" rx="8" fill="#151824" stroke="#E84A27" strokeWidth="2"/>
-          <circle cx="50" cy="65" r="8" fill="#E84A27" fillOpacity="0.4"/>
-          <path d="M30 55L15 75M70 55L85 75" stroke="#1C2030" strokeWidth="4" strokeLinecap="round"/>
-          <path d="M40 95L35 130M60 95L65 130" stroke="#151824" strokeWidth="5" strokeLinecap="round"/>
+        <svg className="w-24 h-32 sm:w-32 sm:h-44 drop-shadow-[0_0_20px_rgba(236,72,153,0.75)]" viewBox="0 0 100 140" fill="none">
+          <circle cx="50" cy="25" r="18" fill="#130924" stroke="#EC4899" strokeWidth="3"/>
+          <path d="M40 22C45 20 55 20 60 22" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round"/>
+          <circle cx="43" cy="24" r="2.5" fill="#EF4444"/>
+          <circle cx="57" cy="24" r="2.5" fill="#EF4444"/>
+          <rect x="30" y="45" width="40" height="50" rx="8" fill="#0D061A" stroke="#A855F7" strokeWidth="2.5"/>
+          <circle cx="50" cy="65" r="8" fill="#EC4899" fillOpacity="0.5"/>
+          <path d="M30 55L15 75M70 55L85 75" stroke="#A855F7" strokeWidth="4" strokeLinecap="round"/>
+          <path d="M40 95L35 130M60 95L65 130" stroke="#EC4899" strokeWidth="5" strokeLinecap="round"/>
         </svg>
       </div>
 
       <div className="robot-walker-2">
-        <svg className="w-20 h-28 sm:w-28 sm:h-36 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="50" cy="25" rx="15" ry="12" fill="#1C2030" stroke="#3B82F6" strokeWidth="3"/>
-          <rect x="38" y="22" width="24" height="6" rx="3" fill="#3B82F6"/>
-          <rect x="32" y="40" width="36" height="45" rx="6" fill="#151824" stroke="#3B82F6" strokeWidth="2"/>
-          <path d="M32 50L18 65M68 50L82 65" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round"/>
-          <path d="M42 85L38 125M58 85L62 125" stroke="#1C2030" strokeWidth="4" strokeLinecap="round"/>
+        <svg className="w-20 h-28 sm:w-28 sm:h-36 drop-shadow-[0_0_20px_rgba(168,85,247,0.75)]" viewBox="0 0 100 140" fill="none">
+          <ellipse cx="50" cy="25" rx="15" ry="12" fill="#130924" stroke="#A855F7" strokeWidth="3"/>
+          <rect x="38" y="22" width="24" height="6" rx="3" fill="#EF4444"/>
+          <rect x="32" y="40" width="36" height="45" rx="6" fill="#0D061A" stroke="#A855F7" strokeWidth="2.5"/>
+          <path d="M32 50L18 65M68 50L82 65" stroke="#EC4899" strokeWidth="3.5" strokeLinecap="round"/>
+          <path d="M42 85L38 125M58 85L62 125" stroke="#A855F7" strokeWidth="4" strokeLinecap="round"/>
         </svg>
       </div>
 
       <div className="robot-walker-3">
-        <svg className="w-20 h-28 sm:w-28 sm:h-36 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="25" r="14" fill="#1C2030" stroke="#A855F7" strokeWidth="3"/>
-          <circle cx="50" cy="25" r="5" fill="#A855F7"/>
-          <rect x="35" y="42" width="30" height="48" rx="5" fill="#151824" stroke="#A855F7" strokeWidth="2"/>
-          <path d="M35 52L20 62M65 52L80 62" stroke="#A855F7" strokeWidth="3" strokeLinecap="round"/>
-          <path d="M42 90L40 125M58 90L60 125" stroke="#151824" strokeWidth="4" strokeLinecap="round"/>
+        <svg className="w-20 h-28 sm:w-28 sm:h-36 drop-shadow-[0_0_20px_rgba(239,68,68,0.75)]" viewBox="0 0 100 140" fill="none">
+          <circle cx="50" cy="25" r="14" fill="#130924" stroke="#EF4444" strokeWidth="3"/>
+          <circle cx="50" cy="25" r="5" fill="#EC4899"/>
+          <rect x="35" y="42" width="30" height="48" rx="5" fill="#0D061A" stroke="#EF4444" strokeWidth="2.5"/>
+          <path d="M35 52L20 62M65 52L80 62" stroke="#EF4444" strokeWidth="3.5" strokeLinecap="round"/>
+          <path d="M42 90L40 125M58 90L60 125" stroke="#A855F7" strokeWidth="4" strokeLinecap="round"/>
         </svg>
       </div>
 
-      {/* ================= EFEK GALAKSI & BINTANG NEON DI BACKGROUND ================= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-10 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-pink-600/10 via-purple-600/10 to-transparent blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/3 right-10 w-[450px] h-[450px] rounded-full bg-gradient-to-l from-orange-600/10 via-red-600/10 to-transparent blur-[150px] pointer-events-none" />
-        <div className="absolute top-20 left-[15%] w-2 h-2 rounded-full bg-[#E84A27] star-neon-1" />
-        <div className="absolute top-40 right-[25%] w-1.5 h-1.5 rounded-full bg-pink-500 star-neon-2" />
-        <div className="absolute top-1/3 left-[35%] w-2 h-2 rounded-full bg-purple-400 star-neon-3" />
-        <div className="absolute top-[60%] right-[15%] w-1.5 h-1.5 rounded-full bg-[#E84A27] star-neon-1" />
-        <div className="absolute bottom-24 left-[20%] w-2 h-2 rounded-full bg-pink-400 star-neon-2" />
-        <div className="absolute top-[25%] right-[10%] w-2 h-2 rounded-full bg-amber-300 star-neon-3" />
+      {/* ================= EFEK GALAKSI NEBULA UNGU-MERAH & BINTANG NEON ================= */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-20 left-1/4 w-[520px] h-[520px] rounded-full bg-gradient-to-r from-purple-700/25 via-fuchsia-600/20 to-transparent blur-[150px]" />
+        <div className="absolute top-1/2 -right-20 w-[550px] h-[550px] rounded-full bg-gradient-to-l from-red-600/25 via-pink-600/20 to-transparent blur-[160px]" />
+        <div className="absolute bottom-0 left-10 w-[420px] h-[420px] rounded-full bg-gradient-to-tr from-violet-800/25 via-rose-600/15 to-transparent blur-[140px]" />
+
+        <div className="absolute top-24 left-[12%] w-2.5 h-2.5 rounded-full bg-pink-500 star-neon-1" />
+        <div className="absolute top-44 right-[22%] w-2 h-2 rounded-full bg-purple-400 star-neon-2" />
+        <div className="absolute top-1/3 left-[38%] w-2.5 h-2.5 rounded-full bg-red-500 star-neon-3" />
+        <div className="absolute top-[58%] right-[14%] w-2.5 h-2.5 rounded-full bg-fuchsia-400 star-neon-1" />
+        <div className="absolute bottom-28 left-[18%] w-2 h-2 rounded-full bg-rose-500 star-neon-2" />
+        <div className="absolute top-[22%] right-[9%] w-2.5 h-2.5 rounded-full bg-purple-500 star-neon-3" />
       </div>
 
-      {/* ================= DYNAMIC INTERACTIVE MOUSE GLOW & TECH GRID ================= */}
-      <div className="fixed inset-0 tech-grid-bg pointer-events-none z-0" />
+      {/* ================= DYNAMIC INTERACTIVE MOUSE GLOW & CYBER GRID ================= */}
+      <div className="fixed inset-0 cyber-grid-bg pointer-events-none z-0" />
       <div
         className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 74, 39, 0.12), transparent 75%)`
+          background: `radial-gradient(680px circle at ${mousePos.x}px ${mousePos.y}px, rgba(217, 70, 239, 0.16), rgba(239, 68, 68, 0.08) 40%, transparent 75%)`
         }}
       />
 
-      {/* ================= TOP STATUS BAR ================= */}
-      <div className="sticky top-0 z-40 bg-[#07080C]/85 backdrop-blur-md border-b border-white/10 px-4 py-2.5">
-        <div className="max-w-[1180px] mx-auto flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono tracking-wider uppercase">
+      {/* ================= TOP CYBERPUNK HUD BAR ================= */}
+      <div className="sticky top-0 z-40 bg-[#080411]/85 backdrop-blur-xl border-b border-purple-500/30 px-4 py-2.5 shadow-[0_4px_30px_rgba(168,85,247,0.15)]">
+        <div className="max-w-[1220px] mx-auto flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono-tech tracking-wider uppercase">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#E84A27]/15 text-[#E84A27] border border-[#E84A27]/30 font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E84A27] animate-ping" />
-              PORTFOLIO SYSTEM
+            <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded bg-gradient-to-r from-purple-600/30 to-red-600/30 text-pink-400 border border-pink-500/50 font-bold shadow-[0_0_15px_rgba(236,72,153,0.3)]">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+              SYS.PORTFOLIO // v4.2
             </span>
-            <span className="text-neutral-400 hidden sm:inline">
-              JAKARTA SELATAN, ID
+            <span className="text-purple-300/70 hidden sm:inline">
+              LOC: JAKARTA_SELATAN // ID
             </span>
           </div>
-          <div className="flex items-center gap-4 text-neutral-400">
-            <span className="text-neutral-300 font-semibold">{sysTime}</span>
-            <span className="hidden md:inline text-emerald-400">
-              ● AVAILABLE FOR PROJECTS
+          <div className="flex items-center gap-5 text-purple-200">
+            <span className="text-pink-400 font-bold">{sysTime}</span>
+            <span className="hidden md:inline text-emerald-400 font-semibold">
+              ● NEURAL_LINK: ONLINE
             </span>
           </div>
         </div>
@@ -516,18 +472,18 @@ export default function Home() {
       <div className="fixed bottom-6 left-6 z-50">
         <button
           onClick={() => setCliOpen(!cliOpen)}
-          className="group px-5 py-3 rounded-xl bg-[#0E1018]/90 backdrop-blur-md text-white shadow-[0_0_25px_rgba(232,74,39,0.2)] flex items-center gap-2.5 text-xs font-mono font-bold hover:bg-[#E84A27] hover:scale-105 active:scale-95 transition-all duration-300 border border-[#E84A27]/40 cursor-pointer"
+          className="group px-5 py-3 rounded-xl bg-[#0F071E]/95 backdrop-blur-md text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] flex items-center gap-2.5 text-xs font-mono-tech font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-red-600 hover:scale-105 active:scale-95 transition-all duration-300 border border-purple-500/50 cursor-pointer"
         >
-          <span className="text-[#E84A27] group-hover:text-white">&gt;_</span>
-          <span>CLI Terminal</span>
+          <span className="text-pink-400 group-hover:text-white">&gt;_</span>
+          <span>CYBER_TERMINAL</span>
         </button>
       </div>
 
       {/* ================= MODAL INTERACTIVE CLI TERMINAL ================= */}
       {cliOpen && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0B0C12] border border-[#E84A27]/50 rounded-2xl w-full max-w-lg overflow-hidden shadow-[0_0_50px_rgba(232,74,39,0.25)] font-mono text-xs relative">
-            <div className="bg-[#12141F] px-4 py-3 flex items-center justify-between border-b border-white/10">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#0B0516] border-2 border-purple-500/60 rounded-2xl w-full max-w-lg overflow-hidden shadow-[0_0_60px_rgba(236,72,153,0.35)] font-mono-tech text-xs relative">
+            <div className="bg-gradient-to-r from-[#1A0B2E] to-[#2A081C] px-4 py-3 flex items-center justify-between border-b border-purple-500/30">
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setCliOpen(false)}
@@ -535,19 +491,19 @@ export default function Home() {
                 />
                 <span className="w-3 h-3 rounded-full bg-amber-400" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500" />
-                <span className="ml-2 text-neutral-300 font-bold text-[11px]">
-                  rafi@portfolio: ~
+                <span className="ml-2 text-pink-300 font-bold text-[11px]">
+                  rafi@cyber-os: ~
                 </span>
               </div>
               <button
                 onClick={() => setCliOpen(false)}
-                className="text-neutral-400 hover:text-[#E84A27] text-xs font-bold cursor-pointer"
+                className="text-purple-300 hover:text-red-400 text-xs font-bold cursor-pointer"
               >
                 ESC ✕
               </button>
             </div>
 
-            <div className="p-5 h-64 overflow-y-auto space-y-2 text-neutral-300">
+            <div className="p-5 h-64 overflow-y-auto space-y-2 text-purple-200">
               {cliHistory.map((item, i) => (
                 <div
                   key={i}
@@ -557,8 +513,8 @@ export default function Home() {
                       : item.type === "error"
                       ? "text-red-400"
                       : item.type === "system"
-                      ? "text-[#E84A27]"
-                      : "text-emerald-400"
+                      ? "text-pink-400 font-bold"
+                      : "text-cyan-300"
                   }
                 >
                   {item.text}
@@ -568,15 +524,15 @@ export default function Home() {
                 onSubmit={handleCliSubmit}
                 className="flex items-center gap-2 pt-2"
               >
-                <span className="text-[#E84A27] font-bold">
-                  rafi@portfolio:~$
+                <span className="text-pink-500 font-bold">
+                  rafi@cyber-os:~$
                 </span>
                 <input
                   type="text"
                   autoFocus
                   value={cliInput}
                   onChange={(e) => setCliInput(e.target.value)}
-                  placeholder="ketik 'help' lalu Enter..."
+                  placeholder="ketik 'help' atau 'robot' lalu Enter..."
                   className="bg-transparent text-white focus:outline-none w-full"
                 />
               </form>
@@ -598,24 +554,23 @@ export default function Home() {
             href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#25D366] text-white rounded-xl shadow-xl text-xs font-bold hover:bg-[#20ba59] hover:scale-105 active:scale-95 transition-all"
+            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#25D366] text-white rounded-xl shadow-xl text-xs font-mono-tech font-bold hover:bg-[#20ba59] hover:scale-105 transition-all"
           >
             <span>💬</span>
             <span>Chat WhatsApp</span>
           </a>
           <button
             onClick={handleCopyEmail}
-            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#12141D] border border-white/15 rounded-xl shadow-xl text-xs font-bold text-white hover:border-[#E84A27] hover:text-[#E84A27] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#140826] border border-purple-500/40 rounded-xl shadow-xl text-xs font-mono-tech font-bold text-white hover:border-pink-500 hover:text-pink-400 hover:scale-105 transition-all cursor-pointer"
           >
             <span>{copied ? "✓" : "📋"}</span>
             <span>{copied ? "Email Tersalin!" : "Salin Email"}</span>
           </button>
-
           <a
             href={myGithub}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#12141D] border border-white/15 rounded-xl shadow-xl text-xs font-bold text-white hover:border-[#E84A27] hover:text-[#E84A27] hover:scale-105 active:scale-95 transition-all"
+            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#140826] border border-purple-500/40 rounded-xl shadow-xl text-xs font-mono-tech font-bold text-white hover:border-pink-500 hover:text-pink-400 hover:scale-105 transition-all"
           >
             <span>🌿</span>
             <span>Kunjungi GitHub</span>
@@ -625,7 +580,7 @@ export default function Home() {
         <button
           onClick={() => setQuickActionOpen(!quickActionOpen)}
           aria-label="Toggle Quick Action"
-          className="w-13 h-13 rounded-xl bg-[#E84A27] text-white shadow-[0_0_25px_rgba(232,74,39,0.45)] flex items-center justify-center text-xl font-bold hover:bg-[#ff5935] hover:scale-110 active:scale-90 transition-all duration-300 border border-white/25 cursor-pointer"
+          className="w-13 h-13 rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 text-white shadow-[0_0_30px_rgba(236,72,153,0.6)] flex items-center justify-center text-xl font-bold hover:scale-110 active:scale-90 transition-all duration-300 border border-white/30 cursor-pointer"
         >
           <span
             className={`transition-transform duration-300 ${
@@ -638,75 +593,119 @@ export default function Home() {
       </div>
 
       {/* ================= MAIN CONTAINER ================= */}
-      <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
+      <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
         
-        {/* ================= HERO SECTION ================= */}
+        {/* ================= CYBERPUNK HERO SECTION (DENGAN ROBOT 1 INTERAKTIF) ================= */}
         <section
           id="about"
-          className="bg-[#0D0F17]/90 backdrop-blur-xl rounded-[2rem] overflow-hidden shadow-[0_0_65px_-15px_rgba(232,74,39,0.18)] border border-white/10 relative group"
+          className="bg-[#0C051A]/90 backdrop-blur-2xl rounded-[2rem] overflow-hidden shadow-[0_0_80px_-15px_rgba(168,85,247,0.35)] border border-purple-500/35 relative"
         >
-          <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#E84A27] pointer-events-none z-20" />
-          <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#E84A27] pointer-events-none z-20" />
+          <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-pink-500 pointer-events-none z-20" />
+          <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-red-500 pointer-events-none z-20" />
+          <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-purple-400 pointer-events-none z-20" />
+          <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-pink-500 pointer-events-none z-20" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[590px]">
-            <div className="lg:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-between relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[640px]">
+            
+            {/* KOLOM KIRI: IDENTITAS & BIO */}
+            <div className="lg:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-between relative z-10">
               <div>
-                <div className="flex items-center justify-between flex-wrap gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-purple-500/20">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#E84A27] flex items-center justify-center text-white font-black text-xs tracking-tighter shadow-[0_0_20px_rgba(232,74,39,0.5)]">
-                      RR
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 flex items-center justify-center text-white font-cyber font-black text-sm tracking-tighter shadow-[0_0_25px_rgba(236,72,153,0.6)]">
+                      MRR
                     </div>
                     <div>
-                      <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-neutral-400 block">
+                      <span className="text-[10px] font-mono-tech uppercase tracking-[0.25em] text-pink-400 block font-bold">
+                        FIG. 01 // DEVELOPER UNIT
+                      </span>
+                      <span className="text-xs font-mono-tech text-purple-200/80">
                         Jakarta Selatan • Indonesia
                       </span>
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-[#E84A27]/10 border border-[#E84A27]/30 text-[#E84A27] font-semibold">
-                    WEB &amp; MOBILE DEVELOPER
-                  </span>
+                  <nav className="flex flex-wrap items-center gap-4 text-xs font-mono-tech font-bold uppercase tracking-wider">
+                    <a href="#skills" className="text-purple-200 hover:text-pink-400 transition">
+                      Skills
+                    </a>
+                    <a href="#expertise" className="text-purple-200 hover:text-pink-400 transition">
+                      Focus
+                    </a>
+                    <a href="#projects" className="text-purple-200 hover:text-pink-400 transition">
+                      Projects
+                    </a>
+                    <a
+                      href="#contact"
+                      className="px-3.5 py-1.5 bg-gradient-to-r from-purple-600 to-red-600 text-white rounded-lg shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:scale-105 transition"
+                    >
+                      Contact
+                    </a>
+                  </nav>
                 </div>
 
-                <div className="mt-8 relative">
-                  <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase leading-[0.9] tracking-tight">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E84A27] via-[#FF7B54] to-[#E84A27] drop-shadow-[0_0_25px_rgba(232,74,39,0.3)]">
+                <div className="mt-7 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-950/80 border border-pink-500/40 text-pink-400 text-[11px] font-mono-tech font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(236,72,153,0.2)]">
+                  <span>⚡</span> FULL-STACK WEB &amp; MOBILE DEVELOPER
+                </div>
+
+                <div className="mt-5 relative">
+                  <h1 className="font-cyber text-4xl sm:text-6xl lg:text-[62px] font-black uppercase leading-[0.95] tracking-tight">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 drop-shadow-[0_0_30px_rgba(236,72,153,0.45)]">
                       Muhamad Rafi
                     </span>
                     <br />
-                    <span className="text-white">Ramadhan</span>
+                    <span className="text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">
+                      Ramadhan
+                    </span>
                   </h1>
                 </div>
 
-                {/* Bio Diperbarui: Fokus ke Skill, Tanpa "Jakarta Selatan", dan Rata Kiri-Kanan (Justify) */}
-                <p className="mt-6 text-neutral-300 text-sm sm:text-base leading-relaxed text-justify max-w-lg font-normal">
+                <p className="mt-6 text-purple-100/85 text-sm sm:text-base leading-relaxed text-justify max-w-xl font-normal">
                   Mahasiswa aktif S1 Sistem Informasi yang berfokus mengembangkan aplikasi web dan mobile modern, merancang arsitektur database yang solid, serta membangun antarmuka pengguna yang intuitif end-to-end.
                 </p>
 
-                <div className="mt-6 flex flex-wrap items-center gap-3.5">
+                <div className="mt-7 flex flex-wrap items-center gap-4">
                   <a
                     href="#projects"
-                    className="px-6 py-3 rounded-xl bg-[#E84A27] text-white text-xs font-mono font-bold uppercase tracking-widest hover:bg-[#ff5a36] hover:shadow-[0_0_25px_rgba(232,74,39,0.55)] hover:-translate-y-0.5 transition-all"
+                    className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white text-xs font-cyber font-bold uppercase tracking-widest shadow-[0_0_30px_rgba(236,72,153,0.5)] hover:shadow-[0_0_45px_rgba(239,68,68,0.75)] hover:-translate-y-0.5 transition-all"
                   >
-                    Lihat Karya ↓
+                    Explore System ↓
                   </a>
                   <a
                     href="/cv.pdf"
                     download="CV_Muhamad_Rafi_Ramadhan.pdf"
-                    className="px-6 py-3 rounded-xl bg-[#161926] text-neutral-200 border border-white/15 text-xs font-mono font-bold uppercase tracking-widest hover:bg-[#E84A27]/15 hover:border-[#E84A27] transition-all"
+                    className="px-6 py-3.5 rounded-xl bg-[#170B2C] text-purple-100 border border-purple-500/40 text-xs font-mono-tech font-bold uppercase tracking-widest hover:bg-purple-900/40 hover:border-pink-500 transition-all"
                   >
                     📄 Download CV
                   </a>
                 </div>
+
+                {/* Kartu Mini Foto Profil Asli */}
+                <div className="mt-8 p-3.5 rounded-2xl bg-[#130826]/90 border border-purple-500/30 flex items-center gap-4 max-w-md shadow-lg">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-pink-500 shrink-0 relative">
+                    <img
+                      src="/fotoprofile.jpg"
+                      alt="Muhamad Rafi Ramadhan"
+                      className="w-full h-full object-cover object-top scale-110"
+                    />
+                  </div>
+                  <div className="text-xs font-mono-tech">
+                    <div className="text-white font-bold flex items-center gap-2">
+                      <span>OPERATOR: M. RAFI RAMADHAN</span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                    </div>
+                    <p className="text-purple-300/80 text-[11px] mt-0.5">
+                      S1 Information Systems • Open for Work &amp; Projects
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-10 pt-6 border-t border-white/10">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-mono font-bold text-[#E84A27] uppercase tracking-widest">
-                    Core Technologies
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-2 text-xs font-mono font-semibold">
+              <div className="mt-8 pt-6 border-t border-purple-500/20">
+                <span className="text-[10px] font-mono-tech font-bold text-pink-400 uppercase tracking-widest block mb-3">
+                  // CORE NEURAL STACK
+                </span>
+                <div className="flex flex-wrap gap-2 text-xs font-mono-tech font-semibold">
                   {[
                     "Next.js",
                     "React.js",
@@ -719,7 +718,7 @@ export default function Home() {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 bg-[#151824] text-neutral-200 rounded-lg border border-white/10 hover:border-[#E84A27] hover:text-[#E84A27] hover:shadow-[0_0_15px_rgba(232,74,39,0.2)] hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+                      className="px-3 py-1.5 bg-[#160A2A] text-purple-100 rounded-lg border border-purple-500/30 hover:border-pink-500 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:-translate-y-0.5 transition-all cursor-default"
                     >
                       {tech}
                     </span>
@@ -728,110 +727,118 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#E84A27] via-[#D63C1A] to-[#9E2309] p-8 sm:p-10 flex flex-col justify-between text-white relative overflow-hidden">
+            {/* KOLOM KANAN: GAMBAR ROBOT 1 INTERAKTIF (robot1.jpg) */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-[#17072B] via-[#240830] to-[#12041C] p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden border-t lg:border-t-0 lg:border-l border-purple-500/30">
+              
+              {/* Garis Neon Horizontal Cyberpunk ala Dozfx */}
+              <div className="absolute inset-x-0 top-16 space-y-3 pointer-events-none opacity-45">
+                <div className="h-1.5 w-full bg-gradient-to-r from-transparent via-pink-500 to-transparent blur-[1px]" />
+                <div className="h-3 w-4/5 mx-auto bg-gradient-to-r from-transparent via-red-500 to-transparent blur-[2px]" />
+                <div className="h-1 w-full bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
+              </div>
+
+              <div className="relative z-10 flex items-center justify-between text-[11px] font-mono-tech">
+                <span className="px-2.5 py-1 rounded bg-black/50 border border-pink-500/40 text-pink-400 font-bold">
+                  ASSET // ROBOT_01
+                </span>
+                <span className="text-red-400 font-bold animate-pulse">
+                  ● INTERACTIVE_UNIT
+                </span>
+              </div>
+
+              {/* GAMBAR ROBOT 1 DENGAN EFEK PARALLAX MOUSE & SCANLINE */}
               <div
-                className="absolute inset-0 opacity-20 pointer-events-none"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-                  backgroundSize: "20px 20px"
-                }}
-              />
+                onClick={handleRobotInteract}
+                title="Klik Robot untuk Interaksi!"
+                className="my-6 relative z-10 flex flex-col items-center justify-center cursor-pointer group select-none"
+              >
+                {/* Lingkaran Orbit Cybernetic */}
+                <div className="absolute w-72 h-72 rounded-full border border-dashed border-pink-500/40 animate-orbit-cw pointer-events-none" />
+                <div className="absolute w-80 h-80 rounded-full border border-purple-500/25 animate-orbit-ccw pointer-events-none" />
+                <div className="absolute w-64 h-64 rounded-full bg-gradient-to-tr from-purple-600/40 via-pink-500/30 to-red-600/40 blur-2xl animate-pulse pointer-events-none" />
 
-              <nav className="flex flex-wrap justify-end items-center gap-4 text-xs font-mono font-bold uppercase tracking-wider relative z-10">
-                <a href="#about" className="hover:text-black transition-colors">
-                  Home
-                </a>
-                <a href="#skills" className="hover:text-black transition-colors">
-                  Skills
-                </a>
-                <a
-                  href="#expertise"
-                  className="hover:text-black transition-colors"
+                {/* Container Gambar robot1.jpg yang Bergerak Mengikuti Mouse */}
+                <div
+                  style={{
+                    transform: `translate(${moveX}px, ${moveY}px)`,
+                    transition: "transform 0.15s ease-out"
+                  }}
+                  className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-pink-500/50 shadow-[0_0_45px_rgba(236,72,153,0.45)] group-hover:border-red-500 group-hover:scale-[1.03] transition-all duration-500 bg-[#0D0518]"
                 >
-                  Focus
-                </a>
-                <a
-                  href="#projects"
-                  className="hover:text-black transition-colors"
-                >
-                  Projects
-                </a>
-                <a
-                  href="#contact"
-                  className="px-4 py-2 bg-[#07080C] text-white rounded-lg border border-white/20 hover:bg-white hover:text-[#07080C] hover:scale-105 active:scale-95 transition-all shadow-lg"
-                >
-                  Contact
-                </a>
-              </nav>
+                  <img
+                    src="/robot1.jpg"
+                    alt="Interactive Cybernetic Robot 1"
+                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                  />
+                  {/* Filter Blending Cyberpunk Ungu-Merah & Scanline */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C051A] via-purple-900/15 to-transparent pointer-events-none" />
+                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-pink-500/35 to-transparent animate-scanline pointer-events-none" />
 
-              <div className="my-10 flex flex-col items-center justify-center relative z-10">
-                <div className="relative flex items-center justify-center">
-                  <div className="absolute -inset-4 rounded-full border-2 border-dashed border-white/40 animate-orbit-cw pointer-events-none" />
-                  <div className="absolute -inset-8 rounded-full border border-white/20 animate-orbit-ccw pointer-events-none" />
-
-                  <div className="w-56 h-56 sm:w-64 sm:h-64 rounded-full border-4 border-white/70 bg-neutral-900/30 backdrop-blur-sm overflow-hidden flex items-center justify-center shadow-[0_0_50px_rgba(0,0,0,0.45)] relative group">
-                    <img
-                      src="/fotoprofile.jpg"
-                      alt="Muhamad Rafi Ramadhan"
-                      className="w-full h-full object-cover object-top scale-125 z-10 group-hover:scale-135 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-white/30 to-transparent z-20 animate-scanline pointer-events-none" />
+                  {/* Indikator HUD di atas Gambar Robot 1 */}
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md border border-pink-500/40 text-[10px] font-mono-tech text-pink-300">
+                    <span>👆 KLIK ROBOT (MODE)</span>
+                    <span className="text-emerald-400 font-bold">ACTIVE</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-xs font-mono font-semibold text-white/95 relative z-10 bg-black/25 px-4 py-2.5 rounded-xl border border-white/15">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                <span>Available for Work • Jakarta Selatan</span>
+              {/* Kotak Dialog Telemetri Robot 1 */}
+              <div className="relative z-10 bg-black/65 backdrop-blur-md p-4 rounded-2xl border border-pink-500/40 font-mono-tech text-xs">
+                <div className="flex items-center justify-between text-[10px] text-pink-400 font-bold mb-1">
+                  <span>MODE // {robotMode}</span>
+                  <span>SYS_01</span>
+                </div>
+                <p className="text-purple-100 text-[11px] leading-relaxed">
+                  {robotSpeech}
+                </p>
               </div>
-            </div>
 
+            </div>
           </div>
         </section>
 
-        {/* ================= RUNNING TECH TICKER ================= */}
-        <div className="mt-6 bg-[#0D0F17] border border-white/10 rounded-xl py-2.5 overflow-hidden shadow-lg">
-          <div className="animate-marquee-hud font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-400">
+        {/* ================= RUNNING CYBERPUNK TICKER ================= */}
+        <div className="mt-6 bg-[#0D051D] border border-purple-500/30 rounded-xl py-3 overflow-hidden shadow-[0_0_25px_rgba(168,85,247,0.15)]">
+          <div className="animate-marquee-hud font-cyber text-[11px] uppercase tracking-[0.25em] text-purple-300">
             <div className="flex items-center gap-8 px-4 shrink-0">
-              <span className="text-[#E84A27] font-bold">
+              <span className="text-pink-500 font-bold">
                 FULL-STACK WEB DEVELOPMENT
               </span>
-              <span>•</span>
+              <span>⚡</span>
               <span>NEXT.JS &amp; REACT ECOSYSTEM</span>
-              <span>•</span>
-              <span className="text-[#E84A27] font-bold">
+              <span>⚡</span>
+              <span className="text-red-500 font-bold">
                 MOBILE APPLICATION UI/UX
               </span>
-              <span>•</span>
+              <span>⚡</span>
               <span>PHP LARAVEL &amp; NODE.JS</span>
-              <span>•</span>
-              <span className="text-[#E84A27] font-bold">
+              <span>⚡</span>
+              <span className="text-purple-400 font-bold">
                 MYSQL &amp; SQLITE ARCHITECTURE
               </span>
-              <span>•</span>
+              <span>⚡</span>
               <span>S1 SISTEM INFORMASI</span>
-              <span>•</span>
+              <span>⚡</span>
             </div>
             <div className="flex items-center gap-8 px-4 shrink-0">
-              <span className="text-[#E84A27] font-bold">
+              <span className="text-pink-500 font-bold">
                 FULL-STACK WEB DEVELOPMENT
               </span>
-              <span>•</span>
+              <span>⚡</span>
               <span>NEXT.JS &amp; REACT ECOSYSTEM</span>
-              <span>•</span>
-              <span className="text-[#E84A27] font-bold">
+              <span>⚡</span>
+              <span className="text-red-500 font-bold">
                 MOBILE APPLICATION UI/UX
               </span>
-              <span>•</span>
+              <span>⚡</span>
               <span>PHP LARAVEL &amp; NODE.JS</span>
-              <span>•</span>
-              <span className="text-[#E84A27] font-bold">
+              <span>⚡</span>
+              <span className="text-purple-400 font-bold">
                 MYSQL &amp; SQLITE ARCHITECTURE
               </span>
-              <span>•</span>
+              <span>⚡</span>
               <span>S1 SISTEM INFORMASI</span>
-              <span>•</span>
+              <span>⚡</span>
             </div>
           </div>
         </div>
@@ -839,30 +846,30 @@ export default function Home() {
         {/* ================= SKILLS & TECHNICAL TOOLKIT ================= */}
         <section
           id="skills"
-          className="mt-10 bg-[#0D0F17]/90 backdrop-blur-xl rounded-[2rem] p-8 sm:p-12 shadow-2xl border border-white/10 scroll-mt-20 relative"
+          className="mt-12 bg-[#0C051A]/90 backdrop-blur-xl rounded-[2rem] p-8 sm:p-12 shadow-2xl border border-purple-500/30 scroll-mt-20 relative"
         >
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-mono uppercase tracking-widest font-extrabold text-[#E84A27] bg-[#E84A27]/10 px-3.5 py-1 rounded border border-[#E84A27]/30">
-              Capabilities
+            <span className="text-xs font-mono-tech uppercase tracking-widest font-extrabold text-pink-400 bg-pink-500/10 px-3.5 py-1 rounded border border-pink-500/30">
+              System Capabilities
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mt-3 uppercase">
+            <h2 className="font-cyber text-3xl sm:text-4xl font-black text-white tracking-tight mt-3 uppercase">
               Skills &amp; Technical Toolkit
             </h2>
-            <p className="mt-2 text-sm text-neutral-400 leading-relaxed">
+            <p className="mt-2 text-sm text-purple-200/70 leading-relaxed">
               Kompilasi bahasa pemrograman, framework, arsitektur basis data, dan
               perangkat rekayasa perangkat lunak yang saya gunakan.
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <div className="flex flex-wrap justify-center gap-2.5 mb-10">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold border hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-mono-tech font-bold border hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer ${
                   activeCategory === cat
-                    ? "bg-[#E84A27] text-white border-[#E84A27] shadow-[0_0_20px_rgba(232,74,39,0.4)]"
-                    : "bg-[#151824] text-neutral-300 border-white/10 hover:border-[#E84A27]/60 hover:text-white"
+                    ? "bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white border-pink-400 shadow-[0_0_25px_rgba(236,72,153,0.5)]"
+                    : "bg-[#150928] text-purple-200 border-purple-500/30 hover:border-pink-500 hover:text-white"
                 }`}
               >
                 {cat}
@@ -874,9 +881,9 @@ export default function Home() {
             {filteredSkills.map((skill, index) => (
               <div
                 key={index}
-                className="bg-[#131622]/90 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-[#E84A27] hover:shadow-[0_0_30px_rgba(232,74,39,0.18)] hover:-translate-y-1.5 transition-all duration-300 group relative overflow-hidden"
+                className="bg-[#120724]/90 border border-purple-500/25 rounded-2xl p-6 flex flex-col justify-between hover:border-pink-500 hover:shadow-[0_0_35px_rgba(236,72,153,0.25)] hover:-translate-y-1.5 transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-[#E84A27]/20 to-transparent pointer-events-none" />
+                <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-pink-500/25 to-transparent pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -885,7 +892,7 @@ export default function Home() {
                         skill.logos.map((logoUrl, i) => (
                           <div
                             key={i}
-                            className="w-10 h-10 rounded-xl bg-[#1C2030] border border-white/10 p-2 flex items-center justify-center group-hover:border-[#E84A27]/50 group-hover:scale-110 transition-all duration-300 shadow-inner"
+                            className="w-10 h-10 rounded-xl bg-[#1D0C36] border border-purple-500/30 p-2 flex items-center justify-center group-hover:border-pink-500 group-hover:scale-110 transition-all"
                           >
                             <img
                               src={logoUrl}
@@ -894,63 +901,34 @@ export default function Home() {
                             />
                           </div>
                         ))
-                      ) : skill.customSvg === "mobile" ? (
-                        <div className="w-10 h-10 rounded-xl bg-[#1C2030] border border-white/10 p-2 flex items-center justify-center group-hover:border-[#E84A27]/50 group-hover:scale-110 transition-all duration-300 text-[#E84A27]">
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="w-5 h-5"
-                          >
-                            <rect
-                              x="5"
-                              y="2"
-                              width="14"
-                              height="20"
-                              rx="2"
-                              ry="2"
-                            />
-                            <line x1="12" y1="18" x2="12.01" y2="18" />
-                          </svg>
-                        </div>
                       ) : (
-                        <div className="w-10 h-10 rounded-xl bg-[#1C2030] border border-white/10 p-2 flex items-center justify-center group-hover:border-[#E84A27]/50 group-hover:scale-110 transition-all duration-300 text-[#E84A27]">
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="w-5 h-5"
-                          >
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                          </svg>
+                        <div className="w-10 h-10 rounded-xl bg-[#1D0C36] border border-purple-500/30 p-2 flex items-center justify-center text-pink-400 font-mono-tech font-bold">
+                          ⚡
                         </div>
                       )}
                     </div>
 
-                    <span className="text-xs font-mono font-bold text-[#E84A27] bg-[#E84A27]/10 border border-[#E84A27]/30 px-2.5 py-1 rounded-md">
+                    <span className="text-xs font-mono-tech font-bold text-pink-400 bg-pink-500/10 border border-pink-500/30 px-2.5 py-1 rounded-md">
                       {skill.level}
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-white text-base group-hover:text-[#E84A27] transition-colors">
+                  <h3 className="font-cyber font-bold text-white text-base group-hover:text-pink-400 transition-colors">
                     {skill.name}
                   </h3>
-                  <span className="text-[10px] font-mono font-extrabold text-[#E84A27] uppercase tracking-wider block mb-2">
+                  <span className="text-[10px] font-mono-tech font-extrabold text-purple-400 uppercase tracking-wider block mb-2">
                     {skill.category}
                   </span>
 
-                  <p className="text-xs text-neutral-400 leading-relaxed">
+                  <p className="text-xs text-purple-200/75 leading-relaxed">
                     {skill.desc}
                   </p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-white/10">
-                  <div className="w-full bg-black/50 rounded-full h-2 overflow-hidden p-0.5 border border-white/10">
+                <div className="mt-5 pt-3 border-t border-purple-500/20">
+                  <div className="w-full bg-black/60 rounded-full h-2 overflow-hidden p-0.5 border border-purple-500/30">
                     <div
-                      className="bg-gradient-to-r from-[#E84A27] to-[#FF8566] h-full rounded-full shadow-[0_0_10px_#E84A27] transition-all duration-700"
+                      className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 h-full rounded-full shadow-[0_0_12px_#EC4899]"
                       style={{ width: skill.level }}
                     />
                   </div>
@@ -960,25 +938,49 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ================= TECHNICAL FOCUS ================= */}
+        {/* ================= TECHNICAL FOCUS & GAMBAR ROBOT 2 (WAJAH WIREFRAME BINER) ================= */}
         <section
           id="expertise"
-          className="mt-10 bg-[#0A0B11] text-white rounded-[2rem] p-8 sm:p-12 lg:p-14 shadow-2xl border border-white/10 relative overflow-hidden"
+          className="mt-12 bg-[#0A0415] text-white rounded-[2rem] p-8 sm:p-12 lg:p-14 shadow-2xl border border-purple-500/30 relative overflow-hidden"
         >
-          <div className="pb-10 border-b border-white/10 flex flex-col md:flex-row md:items-baseline justify-between gap-6">
-            <div className="shrink-0">
-              <span className="inline-flex items-center text-xs font-mono uppercase tracking-widest font-extrabold text-[#E84A27] bg-[#E84A27]/10 px-3.5 py-1 rounded border border-[#E84A27]/30">
-                Technical Focus
+          {/* Showcase Visual Robot 2 (Wajah AI Wireframe & Kode Biner) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-10 border-b border-purple-500/25">
+            <div className="lg:col-span-7 space-y-4">
+              <span className="inline-flex items-center text-xs font-mono-tech uppercase tracking-widest font-extrabold text-pink-400 bg-pink-500/10 px-3.5 py-1 rounded border border-pink-500/30">
+                Technical Focus // Neural Mesh
               </span>
+              <h2 className="font-cyber text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
+                Arsitektur Kode &amp; Rekayasa Sistem
+              </h2>
+              <p className="text-sm sm:text-base text-purple-200/80 leading-relaxed text-justify m-0">
+                Pendekatan komprehensif dalam rekayasa perangkat lunak—mencakup
+                pengembangan antarmuka reaktif, arsitektur backend andal,
+                perancangan basis data relasional, hingga manajemen versi kode
+                sumber berstandar industri.
+              </p>
             </div>
-            <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-normal max-w-2xl m-0">
-              Pendekatan komprehensif dalam rekayasa perangkat lunak—mencakup
-              pengembangan antarmuka reaktif, arsitektur backend andal, perancangan
-              basis data, hingga manajemen versi kode sumber.
-            </p>
+
+            {/* Panel Gambar robot2.jpg Interaktif */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl overflow-hidden border-2 border-purple-500/40 shadow-[0_0_40px_rgba(168,85,247,0.3)] group">
+                <img
+                  src="/robot2.jpg"
+                  alt="AI Wireframe Matrix Robot 2"
+                  className="w-full h-52 sm:h-60 object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-purple-950/70 via-pink-600/20 to-red-600/25 mix-blend-color pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0415] via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono-tech text-pink-300">
+                  <span>FIG. 02 // NEURAL_MATRIX_CORE</span>
+                  <span className="px-2 py-0.5 rounded bg-pink-500/20 border border-pink-500/40">
+                    11010110
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="divide-y divide-white/10 mt-2">
+          <div className="divide-y divide-purple-500/20 mt-4">
             {expertiseList.map((item) => {
               const isOpen = openExpertise === item.id;
               return (
@@ -989,24 +991,24 @@ export default function Home() {
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <span className="text-xs font-mono text-[#E84A27] px-2.5 py-1 rounded bg-[#E84A27]/10 border border-[#E84A27]/30">
+                      <span className="text-xs font-mono-tech text-pink-400 px-2.5 py-1 rounded bg-pink-500/10 border border-pink-500/30">
                         {item.code}
                       </span>
                       <h3
-                        className={`text-xl sm:text-2xl font-bold transition-colors ${
+                        className={`font-cyber text-lg sm:text-2xl font-bold transition-colors ${
                           isOpen
-                            ? "text-[#E84A27]"
-                            : "text-neutral-200 group-hover:text-white"
+                            ? "text-pink-400"
+                            : "text-purple-100 group-hover:text-white"
                         }`}
                       >
                         {item.title}
                       </h3>
                     </div>
                     <span
-                      className={`text-xl font-mono transition-transform duration-300 ${
+                      className={`text-xl font-mono-tech transition-transform duration-300 ${
                         isOpen
-                          ? "rotate-180 text-[#E84A27]"
-                          : "text-neutral-500 group-hover:translate-y-1"
+                          ? "rotate-180 text-pink-500"
+                          : "text-purple-400 group-hover:translate-y-1"
                       }`}
                     >
                       ↓
@@ -1014,15 +1016,15 @@ export default function Home() {
                   </div>
 
                   {isOpen && (
-                    <div className="mt-6 pt-2 space-y-4 animate-fadeIn">
-                      <p className="text-neutral-300 text-sm leading-relaxed max-w-4xl">
+                    <div className="mt-5 pt-2 space-y-4">
+                      <p className="text-purple-200/85 text-sm leading-relaxed max-w-4xl text-justify">
                         {item.description}
                       </p>
                       <div className="flex flex-wrap gap-2 pt-1">
                         {item.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-xs font-mono px-3 py-1 bg-[#141724] border border-[#E84A27]/30 rounded-md text-[#E84A27]"
+                            className="text-xs font-mono-tech px-3 py-1 bg-[#180A2E] border border-pink-500/40 rounded-md text-pink-300"
                           >
                             {tag}
                           </span>
@@ -1040,15 +1042,15 @@ export default function Home() {
         <section id="projects" className="mt-20 scroll-mt-20">
           <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#E84A27]">
-                Projects I Have Built
+              <span className="text-xs font-mono-tech font-bold uppercase tracking-widest text-pink-400">
+                // DEPLOYED_SYSTEMS
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
+              <h2 className="font-cyber text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
                 Aplikasi Pilihan &amp; Hasil Karya
               </h2>
             </div>
-            <span className="text-xs font-mono text-neutral-400">
-              FEATURED REPOSITORIES
+            <span className="text-xs font-mono-tech text-purple-300/70">
+              VERIFIED REPOSITORIES
             </span>
           </div>
 
@@ -1056,147 +1058,70 @@ export default function Home() {
             {projects.map((proj, idx) => (
               <div
                 key={idx}
-                className="bg-[#0D0F17]/95 rounded-3xl p-7 sm:p-9 border border-white/10 hover:border-[#E84A27] shadow-xl hover:shadow-[0_0_45px_rgba(232,74,39,0.18)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group relative overflow-hidden"
+                className="bg-[#0D061C]/95 rounded-3xl p-7 sm:p-9 border border-purple-500/30 hover:border-pink-500 shadow-xl hover:shadow-[0_0_50px_rgba(236,72,153,0.25)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group relative overflow-hidden"
               >
                 <div>
-                  <div
-                    className={`aspect-[16/10] ${proj.bgColor} rounded-2xl border ${
-                      proj.isDarkBg
-                        ? "border-white/10"
-                        : "border-neutral-300"
-                    } p-8 flex flex-col justify-between mb-6 relative overflow-hidden group-hover:border-[#E84A27]/60 transition-colors`}
-                  >
-                    <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#E84A27]/15 to-transparent animate-scanline pointer-events-none" />
+                  <div className="aspect-[16/10] bg-gradient-to-br from-[#16082B] via-[#0B0415] to-[#260720] rounded-2xl border border-purple-500/30 p-8 flex flex-col justify-between mb-6 relative overflow-hidden group-hover:border-pink-500 transition-colors">
+                    <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-pink-500/20 to-transparent animate-scanline pointer-events-none" />
 
                     <div className="flex items-center justify-between z-10">
-                      <span
-                        className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded ${
-                          proj.isDarkBg
-                            ? "bg-white/10 text-neutral-300"
-                            : "bg-black/10 text-neutral-800"
-                        }`}
-                      >
+                      <span className="text-[10px] font-mono-tech font-bold px-2.5 py-1 rounded bg-purple-950/90 text-purple-200 border border-purple-500/40">
                         {proj.code}
                       </span>
-                      <span className="text-[10px] font-mono font-extrabold uppercase px-3 py-1 rounded-full bg-[#E84A27] text-white shadow-sm">
+                      <span className="text-[10px] font-mono-tech font-extrabold uppercase px-3 py-1 rounded-full bg-gradient-to-r from-purple-600 to-red-600 text-white shadow">
                         {proj.category}
                       </span>
                     </div>
 
-                    <div className="my-auto flex items-center justify-center py-4 z-10 group-hover:scale-110 transition-transform duration-500 animate-float-slow">
+                    <div className="my-auto flex items-center justify-center py-4 z-10 group-hover:scale-110 transition-transform duration-500">
                       {proj.id === "laundry" ? (
-                        <div className="flex items-center gap-3.5 select-none">
-                          <svg
-                            className="w-12 h-12 sm:w-14 sm:h-14 text-[#A855F7] shrink-0 drop-shadow-[0_0_15px_rgba(168,85,247,0.45)]"
-                            viewBox="0 0 64 64"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M4 22H18"
-                              stroke="#A855F7"
-                              strokeWidth="4"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M2 30H16"
-                              stroke="#A855F7"
-                              strokeWidth="4"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M6 38H16"
-                              stroke="#A855F7"
-                              strokeWidth="4"
-                              strokeLinecap="round"
-                            />
-                            <rect
-                              x="18"
-                              y="16"
-                              width="24"
-                              height="26"
-                              rx="3"
-                              fill="#A855F7"
-                            />
-                            <path
-                              d="M42 25H53C54.6569 25 56 26.3431 56 28V42H42V25Z"
-                              fill="#A855F7"
-                            />
-                            <path
-                              d="M45 28H51.5L54 33H45V28Z"
-                              fill="#0B0E1A"
-                            />
-                            <circle
-                              cx="26"
-                              cy="44"
-                              r="6"
-                              fill="#A855F7"
-                              stroke="#0B0E1A"
-                              strokeWidth="3"
-                            />
-                            <circle
-                              cx="48"
-                              cy="44"
-                              r="6"
-                              fill="#A855F7"
-                              stroke="#0B0E1A"
-                              strokeWidth="3"
-                            />
-                          </svg>
-                          <span className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                            R&amp;F Express
+                        <div className="text-center">
+                          <span className="font-cyber text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 drop-shadow-[0_0_20px_rgba(236,72,153,0.5)]">
+                            R&amp;F EXPRESS
+                          </span>
+                          <span className="block text-[10px] font-mono-tech text-purple-300 tracking-widest mt-1">
+                            KANBAN LAUNDRY OS
                           </span>
                         </div>
                       ) : (
-                        <div className="flex items-center justify-center select-none">
-                          <svg
-                            className="w-24 h-24 sm:w-28 sm:h-28 drop-shadow-[0_10px_20px_rgba(229,124,35,0.3)]"
-                            viewBox="0 0 120 120"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M25 20V68C25 88.5 40.5 102 60 102C79.5 102 95 88.5 95 68V44C87 49 82 57 80 65C79 52 83 38 95 29V20H73V68C73 77.5 67.5 83 60 83C52.5 83 47 77.5 47 68V20H25Z"
-                              fill="#E57C23"
-                            />
-                          </svg>
+                        <div className="text-center">
+                          <span className="font-cyber text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-red-500 to-amber-400 drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                            UNITRADE
+                          </span>
+                          <span className="block text-[10px] font-mono-tech text-pink-300 tracking-widest mt-1">
+                            CAMPUS MARKETPLACE
+                          </span>
                         </div>
                       )}
                     </div>
 
-                    <div
-                      className={`flex items-center justify-between pt-3 border-t text-[11px] font-mono z-10 ${
-                        proj.isDarkBg
-                          ? "border-white/10 text-neutral-400"
-                          : "border-neutral-300 text-neutral-600"
-                      }`}
-                    >
-                      <span>Featured Application</span>
-                      <span className="text-[#E84A27] font-bold">
+                    <div className="flex items-center justify-between pt-3 border-t border-purple-500/20 text-[11px] font-mono-tech text-purple-300 z-10">
+                      <span>Status: Production Ready</span>
+                      <span className="text-pink-400 font-bold">
                         Source Code ↗
                       </span>
                     </div>
                   </div>
 
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#E84A27]">
+                  <span className="text-xs font-mono-tech font-bold uppercase tracking-wider text-pink-400">
                     {proj.subtitle}
                   </span>
 
-                  <h3 className="text-2xl font-bold text-white mt-1 group-hover:text-[#E84A27] transition-colors">
+                  <h3 className="font-cyber text-xl sm:text-2xl font-bold text-white mt-1 group-hover:text-pink-400 transition-colors">
                     {proj.title}
                   </h3>
 
-                  <p className="mt-3 text-neutral-400 text-xs sm:text-sm leading-relaxed">
+                  <p className="mt-3 text-purple-200/75 text-xs sm:text-sm leading-relaxed text-justify">
                     {proj.description}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between gap-4">
+                <div className="mt-8 pt-5 border-t border-purple-500/20 flex items-center justify-between gap-4">
                   <div className="flex flex-wrap gap-1.5">
                     {proj.stack.map((st) => (
                       <span
                         key={st}
-                        className="text-[11px] font-mono text-neutral-300 bg-[#161926] border border-white/10 px-2.5 py-0.5 rounded"
+                        className="text-[11px] font-mono-tech text-purple-200 bg-[#180A2D] border border-purple-500/30 px-2.5 py-0.5 rounded"
                       >
                         {st}
                       </span>
@@ -1206,7 +1131,7 @@ export default function Home() {
                     href={proj.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="shrink-0 text-xs font-mono font-bold text-white bg-[#E84A27] px-4 py-2 rounded-xl hover:bg-[#ff5a36] flex items-center gap-1.5 group-hover:translate-x-1 transition-all shadow-md"
+                    className="shrink-0 text-xs font-mono-tech font-bold text-white bg-gradient-to-r from-purple-600 to-red-600 px-4 py-2 rounded-xl hover:opacity-95 flex items-center gap-1.5 shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-all"
                   >
                     Buka GitHub <span>→</span>
                   </a>
@@ -1216,128 +1141,86 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ================= ENGINEERING WORKFLOW & ACADEMIC BACKGROUND ================= */}
+        {/* ================= WORKFLOW & BANNER KONTAK (DENGAN GAMBAR ROBOT 3) ================= */}
         <section className="mt-20">
-          <div className="mb-10">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#E84A27]">
-              How I Work
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
-              Alur Kerja &amp; Metodologi Sistem
-            </h2>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {workflows.map((wf, idx) => (
               <div
                 key={idx}
-                className="bg-[#0D0F17]/90 rounded-3xl p-7 border border-white/10 hover:border-[#E84A27] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                className="bg-[#0C051A]/90 rounded-3xl p-7 border border-purple-500/30 hover:border-pink-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-3xl font-black text-[#E84A27] font-mono">
+                    <span className="font-cyber text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-red-500">
                       {wf.step}
                     </span>
-                    <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider px-3 py-1 bg-[#E84A27]/10 text-[#E84A27] rounded-full border border-[#E84A27]/30">
+                    <span className="text-[10px] font-mono-tech font-extrabold uppercase tracking-wider px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/30">
                       {wf.phase}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-[#E84A27] transition-colors">
+                  <h3 className="font-cyber text-lg font-bold text-white group-hover:text-pink-400 transition-colors">
                     {wf.title}
                   </h3>
-                  <p className="mt-3 text-xs sm:text-sm text-neutral-400 leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-sm text-purple-200/75 leading-relaxed">
                     {wf.desc}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-neutral-500">
-                  <span>Standardized Process</span>
+                <div className="mt-6 pt-4 border-t border-purple-500/20 flex items-center justify-between text-[11px] font-mono-tech text-purple-400">
+                  <span>Standardized Protocol</span>
                   <span className="text-emerald-400 font-bold">● Verified</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 bg-[#0D0F17]/90 rounded-3xl p-7 sm:p-9 border border-white/10 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2.5">
-                <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#E84A27]">
-                  Academic Background
-                </span>
-                <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                  Active Student
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-white">
-                Bachelor of Information Systems (S1 Sistem Informasi)
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-400 max-w-2xl leading-relaxed">
-                Mempelajari rekayasa perangkat lunak, analisis proses bisnis,
-                perancangan Enterprise Resource Planning (ERP), struktur basis
-                data relasional, serta metode sistem pendukung keputusan.
-              </p>
-            </div>
-            <div className="shrink-0 flex flex-wrap gap-2">
-              {[
-                "System Analysis",
-                "Database Design",
-                "ERP Concepts",
-                "Software Engineering"
-              ].map((course) => (
-                <span
-                  key={course}
-                  className="text-xs font-mono px-3 py-1.5 bg-[#151824] border border-white/10 rounded-xl text-neutral-200 font-semibold"
-                >
-                  {course}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* ================= BANNER KOLABORASI & KONTAK ================= */}
+          {/* ================= BANNER KOLABORASI & KONTAK (DENGAN ROBOT 3 WIREFRAME HANDSHAKE) ================= */}
           <div
             id="contact"
-            className="mt-8 bg-[#0D0F17] rounded-[2rem] p-8 sm:p-12 border-2 border-[#E84A27]/40 animate-pulse-border grid grid-cols-1 lg:grid-cols-12 gap-8 items-center scroll-mt-20"
+            className="mt-10 bg-[#0C051A] rounded-[2rem] p-8 sm:p-12 border-2 border-purple-500/50 animate-pulse-cyber grid grid-cols-1 lg:grid-cols-12 gap-8 items-center scroll-mt-20"
           >
             <div className="lg:col-span-5 space-y-4">
-              <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#E84A27] bg-[#E84A27]/10 px-3 py-1 rounded border border-[#E84A27]/30">
-                Ready to Collaborate
+              <span className="text-xs font-mono-tech font-extrabold uppercase tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded border border-pink-500/30">
+                // NEURAL HANDSHAKE PROTOCOL
               </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+              <h3 className="font-cyber text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight uppercase">
                 Mari Bangun Sistem Aplikasi Anda Berikutnya
               </h3>
-              <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed">
+
+              {/* Gambar Robot 3 (Wireframe Handshake) */}
+              <div className="relative rounded-2xl overflow-hidden border border-pink-500/40 shadow-[0_0_30px_rgba(236,72,153,0.25)] group my-3">
+                <img
+                  src="/robot3.jpg"
+                  alt="Cybernetic Wireframe Handshake Robot 3"
+                  className="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-transparent to-red-900/40 mix-blend-color pointer-events-none" />
+                <div className="absolute bottom-2 left-3 text-[10px] font-mono-tech text-pink-300 bg-black/70 px-2.5 py-0.5 rounded border border-pink-500/30">
+                  FIG. 03 // TRUST_CONNECTION_ESTABLISHED
+                </div>
+              </div>
+
+              <p className="text-purple-200/80 text-xs sm:text-sm leading-relaxed text-justify">
                 Terbuka untuk peluang kerja Full-Time, Part-Time, Magang, maupun
                 kolaborasi pengembangan proyek Web &amp; Mobile di area Jakarta
                 Selatan dan sekitarnya.
               </p>
-              <div className="pt-2 space-y-3 text-xs font-mono text-neutral-300">
-                <p className="flex items-center gap-2">
-                  <span>📍</span>{" "}
-                  <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>
-                </p>
-                <p className="flex items-center gap-2">
-                  <span>🎓</span>{" "}
-                  <span>
-                    Undergraduate in Information Systems (S1 Sistem Informasi)
-                  </span>
-                </p>
-                <div className="pt-3 flex flex-wrap gap-3">
-                  <a
-                    href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-[#25D366] text-white rounded-xl text-xs font-bold hover:bg-[#20ba59] hover:scale-105 transition-all shadow-lg"
-                  >
-                    <span>💬</span> Chat WhatsApp
-                  </a>
-                  <a
-                    href={`mailto:${myEmail}`}
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-[#161926] text-white border border-white/15 rounded-xl text-xs font-bold hover:bg-[#E84A27] hover:border-[#E84A27] transition-all shadow-lg"
-                  >
-                    <span>✉️</span> Email Saya
-                  </a>
-                </div>
+
+              <div className="pt-2 flex flex-wrap gap-3 font-mono-tech">
+                <a
+                  href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-[#25D366] text-white rounded-xl text-xs font-bold hover:bg-[#20ba59] hover:scale-105 transition-all shadow-lg"
+                >
+                  <span>💬</span> Chat WhatsApp
+                </a>
+                <a
+                  href={`mailto:${myEmail}`}
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-[#190B2E] text-white border border-purple-500/40 rounded-xl text-xs font-bold hover:bg-pink-600 hover:border-pink-500 transition-all shadow-lg"
+                >
+                  <span>✉️</span> Email Saya
+                </a>
               </div>
             </div>
 
@@ -1349,7 +1232,7 @@ export default function Home() {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1.5">
+                    <label className="block text-[11px] font-mono-tech font-bold uppercase tracking-wider text-purple-300 mb-1.5">
                       Nama Lengkap
                     </label>
                     <input
@@ -1357,11 +1240,11 @@ export default function Home() {
                       name="name"
                       required
                       placeholder="Nama Anda"
-                      className="w-full px-4 py-3 rounded-xl bg-[#141722] border border-white/10 text-white text-sm focus:outline-none focus:border-[#E84A27] transition"
+                      className="w-full px-4 py-3 rounded-xl bg-[#150826] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1.5">
+                    <label className="block text-[11px] font-mono-tech font-bold uppercase tracking-wider text-purple-300 mb-1.5">
                       Alamat Email
                     </label>
                     <input
@@ -1369,27 +1252,27 @@ export default function Home() {
                       name="email"
                       required
                       placeholder="email@perusahaan.com"
-                      className="w-full px-4 py-3 rounded-xl bg-[#141722] border border-white/10 text-white text-sm focus:outline-none focus:border-[#E84A27] transition"
+                      className="w-full px-4 py-3 rounded-xl bg-[#150826] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1.5">
+                  <label className="block text-[11px] font-mono-tech font-bold uppercase tracking-wider text-purple-300 mb-1.5">
                     Detail Pesan / Tawaran Proyek
                   </label>
                   <textarea
                     name="message"
-                    rows={3}
+                    rows={4}
                     required
                     placeholder="Halo Rafi, kami tertarik untuk mendiskusikan..."
-                    className="w-full px-4 py-3 rounded-xl bg-[#141722] border border-white/10 text-white text-sm focus:outline-none focus:border-[#E84A27] transition"
+                    className="w-full px-4 py-3 rounded-xl bg-[#150826] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-pink-500 transition"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#E84A27] text-white font-mono font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#ff5a36] hover:shadow-[0_0_25px_rgba(232,74,39,0.45)] transition-all cursor-pointer"
+                  className="w-full py-3.5 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white font-cyber font-bold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-[0_0_30px_rgba(236,72,153,0.5)] transition-all cursor-pointer"
                 >
-                  Kirim Pesan Sekarang →
+                  Transmit Message →
                 </button>
               </form>
             </div>
@@ -1397,51 +1280,45 @@ export default function Home() {
         </section>
 
         {/* ================= FOOTER ================= */}
-        <footer className="mt-16 bg-[#090A0F] text-neutral-400 rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/10">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-8 border-b border-white/10">
+        <footer className="mt-16 bg-[#080311] text-purple-300/70 rounded-3xl p-8 sm:p-12 shadow-2xl border border-purple-500/25">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-8 border-b border-purple-500/20">
             <div>
-              <p className="text-xs text-white font-mono font-bold">
-                © 2026 Muhamad Rafi Ramadhan. All Rights Reserved.
+              <p className="text-xs text-white font-cyber font-bold tracking-wider">
+                © 2026 MUHAMAD RAFI RAMADHAN // ALL RIGHTS RESERVED.
               </p>
-              <div className="flex gap-4 mt-2 text-[11px] font-mono text-neutral-500">
-                <span className="hover:text-neutral-300 cursor-pointer transition">
-                  Terms of Use
-                </span>
-                <span>•</span>
-                <span className="hover:text-neutral-300 cursor-pointer transition">
-                  Privacy Policy
-                </span>
-              </div>
+              <p className="text-[11px] font-mono-tech text-pink-400 mt-1">
+                CYBERPUNK NEURAL PORTFOLIO EDITION
+              </p>
             </div>
 
-            <div className="flex flex-wrap gap-6 text-xs font-mono font-semibold text-neutral-300">
-              <a href="#about" className="hover:text-[#E84A27] transition">
+            <div className="flex flex-wrap gap-6 text-xs font-mono-tech font-semibold text-purple-200">
+              <a href="#about" className="hover:text-pink-400 transition">
                 Home
               </a>
-              <a href="#skills" className="hover:text-[#E84A27] transition">
+              <a href="#skills" className="hover:text-pink-400 transition">
                 Skills
               </a>
-              <a href="#projects" className="hover:text-[#E84A27] transition">
+              <a href="#projects" className="hover:text-pink-400 transition">
                 Projects
               </a>
-              <a href="#expertise" className="hover:text-[#E84A27] transition">
+              <a href="#expertise" className="hover:text-pink-400 transition">
                 Focus
               </a>
-              <a href="#contact" className="hover:text-[#E84A27] transition">
+              <a href="#contact" className="hover:text-pink-400 transition">
                 Contact
               </a>
             </div>
           </div>
 
-          <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono">
-            <span className="text-neutral-500 text-[11px]">
+          <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono-tech">
+            <span className="text-purple-400 text-[11px]">
               Jakarta Selatan, DKI Jakarta, Indonesia
             </span>
 
-            <div className="flex flex-wrap items-center gap-6 text-neutral-300 text-xs font-bold tracking-wider">
+            <div className="flex flex-wrap items-center gap-6 text-purple-200 text-xs font-bold tracking-wider">
               <a
                 href={`mailto:${myEmail}`}
-                className="hover:text-[#E84A27] hover:scale-105 transition-all"
+                className="hover:text-pink-400 transition-all"
               >
                 EMAIL
               </a>
@@ -1449,7 +1326,7 @@ export default function Home() {
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#25D366] hover:scale-105 transition-all font-bold"
+                className="hover:text-[#25D366] transition-all font-bold"
               >
                 WHATSAPP
               </a>
@@ -1457,7 +1334,7 @@ export default function Home() {
                 href={myGithub}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#E84A27] hover:scale-105 transition-all"
+                className="hover:text-pink-400 transition-all"
               >
                 GITHUB
               </a>
@@ -1465,7 +1342,7 @@ export default function Home() {
                 href={myLinkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#E84A27] hover:scale-105 transition-all"
+                className="hover:text-pink-400 transition-all"
               >
                 LINKEDIN
               </a>
