@@ -31,7 +31,7 @@ export default function MaintenancePage() {
       <header className="max-w-4xl w-full mx-auto flex items-center justify-between text-[11px] font-mono-tech uppercase tracking-widest text-purple-300/80 border-b border-purple-500/25 pb-4 relative z-10">
         <div className="flex items-center gap-2.5">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
-          <span className="text-pink-400 font-bold">MRR // UNDER_MAINTENANCE</span>
+          <span className="text-pink-400 font-bold">RAFI // UNDER_MAINTENANCE</span>
         </div>
         <span className="text-purple-200 font-semibold">{sysTime}</span>
       </header>
